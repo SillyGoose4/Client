@@ -1,10 +1,10 @@
-package connect.database.test.com.clents;
+package com.SillyGoose.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.util.logging.SocketHandler;
+import connect.database.test.com.clents.R;
 
 public class MainActivity extends AppCompatActivity {
 

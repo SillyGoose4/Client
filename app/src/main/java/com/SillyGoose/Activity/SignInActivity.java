@@ -1,4 +1,4 @@
-package connect.database.test.com.clents;
+package com.SillyGoose.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Model.OkHttpUnits;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
+
+import connect.database.test.com.clents.MessageBox;
+import connect.database.test.com.clents.R;
+import okhttp3.OkHttpClient;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -21,7 +26,6 @@ public class SignInActivity extends AppCompatActivity {
     private TextView text_Phone;
     private TextView text_Passwd;
     private Thread thread;
-    private ConnectServer connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +55,30 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
     private void SignIn(){
-        connect=new ConnectServer();
-        thread=new Thread(connect);
-        thread.start();
-        JSONObject data=new JSONObject();
-        try{
-            data.put("Value","SIGNIN");
-            data.put("Phone",text_Phone.getText().toString());
-            data.put("Passwd",text_Passwd.getText().toString());
-            if((connect.Send(data))==MessageBox.SI_SUCCESS){
-                Toast.makeText(getApplicationContext(),"登录成功",
-                        Toast.LENGTH_LONG).show();
-            }else{
 
+        Thread myThread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUnits client=OkHttpUnits.getInstance();
+                JSONObject data=new JSONObject();
+                try{
+                    data.put("Value","SIGNIN");
+                    data.put("Phone",text_Phone.getText().toString());
+                    data.put("Passwd",text_Passwd.getText().toString());
+                    if()== MessageBox.SI_SUCCESS){
+                        Toast.makeText(getApplicationContext(),"登录成功",
+                                Toast.LENGTH_LONG).show();
+                    }else{
+
+                    }
+                }catch(JSONException je){
+                    je.printStackTrace();
+                }catch (IOException ioe){
+                    ioe.printStackTrace();
+                }
             }
-        }catch(JSONException je){
-            je.printStackTrace();
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }
+        })
+
     }
 
 }

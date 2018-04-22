@@ -1,13 +1,8 @@
-package connect.database.test.com.clents;
+package com.SillyGoose.Activity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.MediaCodec;
-import android.nfc.Tag;
 import android.os.CountDownTimer;
 import android.os.Message;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,18 +11,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mob.MobSDK;
-import com.mob.tools.RxMob;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import connect.database.test.com.clents.MessageBox;
+import connect.database.test.com.clents.R;
 
 /**
  * 使用 MOB提供的sdk 手机短信验证
@@ -44,7 +39,6 @@ public class SignUpActivity extends AppCompatActivity {
     private CountDownTimer timer;
     public EventHandler eventHandler;
     private Thread thread;
-    ConnectServer connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,13 +224,13 @@ public class SignUpActivity extends AppCompatActivity {
                 if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
                     Toast.makeText(getApplicationContext(), "验证码输入正确",
                             Toast.LENGTH_LONG).show();
-                    Send();
+                    send();
                 }
             }else{
                 Toast.makeText(getApplicationContext(),"验证码输入错误", Toast.LENGTH_LONG).show();
             }
         }
-        public void Send(){
+        public void send(){
             thread=new Thread(connect);
             thread.start();
             JSONObject json=new JSONObject();
@@ -259,8 +253,13 @@ public class SignUpActivity extends AppCompatActivity {
                     case SYS_NETERR:
                         Toast.makeText(getApplicationContext(), "网络连接失败",
                                 Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "网络连接失败",
+                                Toast.LENGTH_LONG).show();
+                        break;
                 }
-                connect.CloseSocket();
+                //connect.CloseSocket();
             }catch(JSONException e){
                 e.printStackTrace();
             }catch(IOException e){
