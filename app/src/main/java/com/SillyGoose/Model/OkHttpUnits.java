@@ -4,13 +4,14 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.SillyGoose.Utils.MessageBox;
+
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import connect.database.test.com.clents.MessageBox;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -19,8 +20,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.internal.cache.CacheInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * OkHttp
@@ -95,6 +97,7 @@ public class OkHttpUnits {
      * @return
      */
     public static MessageBox get(String url, Callback callback){
+
         MessageBox messageBox = null;
         OkHttpClient client=getClient();
         Request request = new Request.Builder().url(url).build();
@@ -132,17 +135,42 @@ public class OkHttpUnits {
      * @return
      */
     public static MessageBox post(String url, JSONObject params) throws IOException{
-        MessageBox messageBox=null;
-        String postmessage=params.toString();
-        RequestBody body=RequestBody.create(JSON,params.toString());
-        OkHttpClient client=getClient();
-        Request request=new Request.Builder().url(url).post(body).build();
-        Response response=client.newCall(request).execute();
+        MessageBox messageBox = null;
+        String postmessage = params.toString();
+        RequestBody body = RequestBody.create(JSON,postmessage);
+        OkHttpClient client = getClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String msg=response.body().string();
+        Log.d(TAG,msg);
         if(response.isSuccessful()){
-            messageBox = MessageBox.valueOf(response.body().toString());
+            messageBox = MessageBox.valueOf(msg);
         }else{
             messageBox = MessageBox.SYS_NETERR;
         }
+        return messageBox;
+    }
+
+    public static MessageBox post(String url, JSONObject data,Callback call) throws IOException{
+        MessageBox messageBox = null;
+        String postmessage = data.toString();
+
+        RequestBody body = RequestBody.create(JSON,postmessage);
+        OkHttpClient client = getClient();
+        /* 请求 */
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        /* 响应 */
+        client.newCall(request).enqueue(call);
+
+
         return messageBox;
     }
 }

@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".XUtils"
+        android:name="com.SillyGoose.Utils.XUtils"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Game"

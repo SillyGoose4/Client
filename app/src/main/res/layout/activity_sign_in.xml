@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="connect.database.test.com.clents.com.SillyGoose.Activity.SignInActivity">
+    tools:context="com.SillyGoose.Activity.SignInActivity">
 
     <RelativeLayout
         android:layout_width="368dp"
@@ -21,7 +21,7 @@
             tools:layout_editor_absoluteY="-2dp" />
 
         <EditText
-            android:id="@+id/edit_Phone"
+            android:id="@+id/SI_edit_Phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -35,15 +35,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/edit_Phone"
+            android:layout_below="@+id/SI_edit_Phone"
             android:layout_marginTop="28dp"
             android:text="password" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/SI_edit_Passwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/edit_Phone"
+            android:layout_alignStart="@+id/SI_edit_Phone"
             android:layout_alignTop="@+id/View_Passwd"
             android:ems="10"
             android:inputType="textPassword" />
@@ -63,9 +63,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText3"
+            android:layout_below="@+id/SI_edit_Passwd"
             android:layout_marginTop="25dp"
             android:text="SIGNIN" />
+
+        <CheckBox
+            android:id="@+id/SI_cb_AutoSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_SignUp"
+            android:layout_marginTop="48dp"
+            android:layout_toEndOf="@+id/View_Phone"
+            android:text="自动登录" />
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

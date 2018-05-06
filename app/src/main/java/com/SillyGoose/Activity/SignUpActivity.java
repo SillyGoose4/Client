@@ -1,15 +1,19 @@
 package com.SillyGoose.Activity;
 
-import android.os.CountDownTimer;
-import android.os.Message;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Model.OkHttpUnits;
+import com.SillyGoose.Utils.MessageBox;
 import com.mob.MobSDK;
 
 import org.json.JSONException;
@@ -21,7 +25,6 @@ import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import connect.database.test.com.clents.MessageBox;
 import connect.database.test.com.clents.R;
 
 /**
@@ -51,13 +54,11 @@ public class SignUpActivity extends AppCompatActivity {
         btn_SignUp=(Button)findViewById(R.id.btn_SignUp);
         btn_getCode=(Button)findViewById(R.id.btn_getCode);
 
-        name=(TextView)findViewById(R.id.edit_UserName);
-        phone=(TextView)findViewById(R.id.exit_Phone);
-        verification=(TextView)findViewById(R.id.edit_CheckCode);
-        passwd=(TextView)findViewById(R.id.edit_Passwd);
-        verpasswd=(TextView)findViewById(R.id.edit_verPasswd);
-
-        connect=new ConnectServer();
+        name=(TextView)findViewById(R.id.SU_edit_UserName);
+        phone=(TextView)findViewById(R.id.SU_exit_Phone);
+        verification=(TextView)findViewById(R.id.SU_edit_CheckCode);
+        passwd=(TextView)findViewById(R.id.SU_edit_Passwd);
+        verpasswd=(TextView)findViewById(R.id.SU_edit_verPasswd);
 
         MobSDK.init(this,"250a858a8f300","d68d12a22c4e5d8e1f677f92bdc79062");
         /*
@@ -83,10 +84,11 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void afterEvent(int event,int result,Object data){
                 Message msg=new Message();
+                msg.what = 1;
                 msg.arg1=event;
                 msg.arg2=result;
                 msg.obj=data;
-                handler.sendMessage(msg);
+                Mobhandler.sendMessage(msg);
             }
 
         };
@@ -200,12 +202,16 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * 不同于线程，注意子线程是不能使用Toast的
      */
-    Handler handler=new Handler(){
+    @SuppressLint("HandlerLeak")
+    Handler Mobhandler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(msg.what == 1){
+                Log.d("Message HandlerMessage", "handleMessage: 001");
+            }
             int event=msg.arg1;
             int result=msg.arg2;
             Object data=msg.obj;
@@ -222,29 +228,54 @@ public class SignUpActivity extends AppCompatActivity {
             }
             if(result == SMSSDK.RESULT_COMPLETE){
                 if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
-                    Toast.makeText(getApplicationContext(), "验证码输入正确",
-                            Toast.LENGTH_LONG).show();
-                    send();
+                    //Toast.makeText(getApplicationContext(), "验证码输入正确",
+                    //       Toast.LENGTH_SHORT).show();
+                    thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            JSONObject json = new JSONObject();
+                            MessageBox message=null;
+                            Message msg=Msghandler.obtainMessage();
+                            try {
+                                json.put("Value", "SIGNUP");
+                                json.put("UserName",name.getText().toString());
+                                json.put("Passwd",passwd.getText().toString()); //  非加密密码 明文传输需要更改
+                                json.put("Phone",phone.getText().toString());
+                                message = OkHttpUnits.post("http://192.168.126.131:8080/user/login", json);
+                                Log.d("Message value", "run: "+message);
+                                msg.what = 2;
+                                msg.obj = message;
+                                msg.sendToTarget();
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    thread.start();
                 }
-            }else{
+            }else if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE && result == SMSSDK.RESULT_ERROR){
                 Toast.makeText(getApplicationContext(),"验证码输入错误", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"其他错误", Toast.LENGTH_LONG).show();
             }
         }
-        public void send(){
-            thread=new Thread(connect);
-            thread.start();
-            JSONObject json=new JSONObject();
-            MessageBox message=null;
-            try {
-                json.put("Value", "SIGNIN");
-                json.put("UserName",name.getText().toString());
-                json.put("Passwd",passwd.getText().toString()); //  非加密密码 明文传输需要更改
-                json.put("Phone",phone.getText().toString());
-                message=connect.Send(json);
-                switch (message){
+
+    };
+
+    Handler Msghandler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.what == 2) {
+                Log.d("Message HandlerMessage", "handleMessage: 002");
+                Log.d("Message HandlerMessage", "handleMessage: "+msg.obj);
+                switch ((MessageBox)msg.obj) {
                     case SU_SUCCESS:
                         Toast.makeText(getApplicationContext(), "注册成功",
                                 Toast.LENGTH_LONG).show();
+                        //结束此Activity生命周期
+                        finish();
                         break;
                     case SU_FAIL:
                         Toast.makeText(getApplicationContext(), "注册失败",
@@ -259,13 +290,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                         break;
                 }
-                //connect.CloseSocket();
-            }catch(JSONException e){
-                e.printStackTrace();
-            }catch(IOException e){
-                e.printStackTrace();
             }
+            return false;
         }
-    };
+    });
 }
 

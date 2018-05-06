@@ -1,14 +1,10 @@
-package connect.database.test.com.clents;
+package com.SillyGoose.Utils;
 
 import android.app.Application;
-import android.os.Message;
 
 import com.mob.MobSDK;
-import com.mob.commons.SMSSDK;
 
 import org.xutils.x;
-
-import cn.smssdk.EventHandler;
 
 /**
  *
