@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/airport"
+    tools:context="com.SillyGoose.Activity.TripActivity">
+    <ImageButton
+        android:id="@+id/btn_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_album" />
+
+    <ImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_return"
+        />
+
+    <ImageButton
+        android:id="@+id/btn_dongbei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_huabei"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="22dp"
+        android:layout_toStartOf="@+id/btn_album"
+        android:background="@drawable/btn_dongbei" />
+
+    <ImageButton
+        android:id="@+id/btn_huabei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_xibei"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="46dp"
+        android:layout_toEndOf="@+id/btn_return"
+        android:background="@drawable/btn_huabei" />
+
+    <ImageButton
+        android:id="@+id/btn_huadong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_xinan"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_huadong" />
+
+    <ImageButton
+        android:id="@+id/btn_huanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/btn_huabei"
+        android:layout_marginEnd="22dp"
+        android:background="@drawable/btn_huanan" />
+
+    <ImageButton
+        android:id="@+id/btn_huazhong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_huadong"
+        android:layout_marginTop="42dp"
+        android:layout_toEndOf="@+id/btn_return"
+        android:background="@drawable/btn_huazhong" />
+
+    <ImageButton
+        android:id="@+id/btn_xibei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_album"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="82dp"
+        android:background="@drawable/btn_xibei" />
+
+    <ImageButton
+        android:id="@+id/btn_xinan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/btn_xibei"
+        android:layout_alignTop="@+id/btn_xibei"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/btn_xinan" />
+</RelativeLayout>

@@ -25,11 +25,11 @@
     <application
         android:name="com.SillyGoose.Utils.XUtils"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/e_icon"
         android:label="Game"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name="com.SillyGoose.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.SillyGoose.Activity.SignUpActivity" />
-        <activity android:name="com.SillyGoose.Activity.SignInActivity"></activity>
+        <activity android:name="com.SillyGoose.Activity.SignInActivity" />
+        <activity android:name="com.SillyGoose.Activity.PoolActivity" />
+        <activity android:name="com.SillyGoose.Activity.TripActivity"></activity>
     </application>
 
 </manifest>
