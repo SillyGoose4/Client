@@ -8,14 +8,6 @@
     tools:context="com.SillyGoose.Activity.PoolActivity">
 
 
-
-    <ImageButton
-        android:id="@+id/btn_album"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/btn_album" />
     <ImageButton
         android:id="@+id/btn_airplane"
         android:layout_width="wrap_content"
@@ -24,15 +16,6 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_trip"
         />
-
-    <ImageButton
-        android:id="@+id/btn_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/btn_return"
-         />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -47,8 +30,8 @@
         android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageButton6"
-        android:layout_marginTop="36dp"
+        android:layout_alignBottom="@+id/imageButton8"
+        android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/imageButton8"
         android:background="@drawable/btn_wind" />
 
@@ -56,9 +39,9 @@
         android:id="@+id/imageButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/btn_album"
-        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="14dp"
+        android:layout_toStartOf="@+id/imageButton5"
         android:background="@drawable/btn_devil" />
 
     <ImageButton
@@ -74,17 +57,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageButton6"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/imageButton4"
         android:background="@drawable/btn_moon" />
 
     <ImageButton
         android:id="@+id/imageButton7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="26dp"
         android:background="@drawable/btn_rain" />
 
     <ImageButton
@@ -92,8 +74,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageButton5"
         android:background="@drawable/btn_sun" />
+
+    <ImageButton
+        android:id="@+id/btn_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_album" />
+
+    <ImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_return" />
 
 </RelativeLayout>
