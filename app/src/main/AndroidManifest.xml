@@ -40,7 +40,8 @@
         <activity android:name="com.SillyGoose.Activity.SignUpActivity" />
         <activity android:name="com.SillyGoose.Activity.SignInActivity" />
         <activity android:name="com.SillyGoose.Activity.PoolActivity" />
-        <activity android:name="com.SillyGoose.Activity.TripActivity"></activity>
+        <activity android:name="com.SillyGoose.Activity.TripActivity" />
+        <activity android:name="com.SillyGoose.Activity.AlbumActivity"></activity>
     </application>
 
 </manifest>
