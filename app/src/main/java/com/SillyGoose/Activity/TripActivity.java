@@ -1,29 +1,21 @@
 package com.SillyGoose.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.AndroidException;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AbsoluteLayout;
-import android.widget.ImageButton;
-import connect.database.test.com.clents.R;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import connect.database.test.com.clents.R;
 public class TripActivity extends AppCompatActivity {
     private ImageButton btn_return;
     private ImageButton btn_album;
-    private ImageButton btn_xibei;
-    private ImageButton btn_dongbei;
+    private ImageButton btn_西北;
+    private ImageButton btn_东北;
     private ImageButton btn_huabei;
     private ImageButton btn_huanan;
     private ImageButton btn_huahzong;
@@ -56,11 +48,12 @@ public class TripActivity extends AppCompatActivity {
         //去西北
         //btn_xibei=(ImageButton)findViewById(R.id.btn_xibei);
         btn_return.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chenshowDialog();
-            }
-        });}
+              @Override
+              public void onClick(View view) {
+                  chenshowDialog();
+               }
+            });
+        }
 
 
         private void chenshowDialog()
