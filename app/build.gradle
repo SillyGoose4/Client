@@ -5,7 +5,7 @@ android {
     compileSdkVersion 26
     //buildToolsVersion "26.0.3"
     defaultConfig {
-        applicationId "connect.database.test.com.clents"
+        applicationId "sillyGoose.com"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

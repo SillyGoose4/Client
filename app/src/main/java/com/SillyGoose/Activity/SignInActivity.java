@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import connect.database.test.com.clents.R;
+import com.SillyGoose.Activity.R;
 
 /**
  * 使用SharedPreferences自动登录以及记住密码
