@@ -119,12 +119,11 @@ public class TripActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(true);
 
     }
+}
 

@@ -1,15 +1,13 @@
 package com.SillyGoose.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.SillyGoose.Model.OkHttpUnits;
+import com.SillyGoose.Utils.OkHttpUnits;
 
 import connect.database.test.com.clents.R;
 
@@ -63,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
 
     }
 

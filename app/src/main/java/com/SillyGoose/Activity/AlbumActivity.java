@@ -15,4 +15,10 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(true);
+
+    }
 }

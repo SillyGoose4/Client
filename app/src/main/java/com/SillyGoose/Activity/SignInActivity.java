@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Model.OkHttpUnits;
+import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.MessageBox;
 
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+
         /* initizalize */
         text_Passwd=(TextView)findViewById(R.id.SI_edit_Passwd);
         text_Phone=(TextView)findViewById(R.id.SI_edit_Phone);
@@ -65,6 +67,21 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(KeyEvent.KEYCODE_BACK == keyCode){
+            return true;
+        }
+        return false;
     }
 
     /**
