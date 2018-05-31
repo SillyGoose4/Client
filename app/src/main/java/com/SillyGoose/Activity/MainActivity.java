@@ -5,14 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-<<<<<<< HEAD
-
 import com.SillyGoose.Utils.OkHttpUnits;
-=======
-import com.SillyGoose.Model.OkHttpUnits;
->>>>>>> 687b671a8b9e605680c88bf55143f007d6201fbe
-
-import static com.SillyGoose.Activity.R.*;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pool;
@@ -23,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mp=MediaPlayer.create(this, raw.btn);
+        mp=MediaPlayer.create(this, R.raw.btn);
         setContentView(R.layout.activity_main);
-        btn_pool=(ImageButton)findViewById(id.btn_pond);
+        btn_pool=(ImageButton)findViewById(R.id.btn_pond);
         btn_pool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(maini);
             }
         });
-        btn_trip=(ImageButton)findViewById(id.btn_airplane);
+        btn_trip=(ImageButton)findViewById(R.id.btn_airplane);
         btn_trip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(trip);
                 }
             });
-        btn_album=(ImageButton)findViewById(id.btn_album);
+        btn_album=(ImageButton)findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
