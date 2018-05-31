@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import connect.database.test.com.clents.R;
+import com.SillyGoose.Activity.R;
 
 /**
  * 使用 MOB提供的sdk 手机短信验证

@@ -10,19 +10,17 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.SillyGoose.Activity.R;
 
-import connect.database.test.com.clents.R;
+
 public class TripActivity extends AppCompatActivity {
     private ImageButton btn_return;
     private ImageButton btn_album;
-<<<<<<< HEAD
     MediaPlayer mp=new MediaPlayer();
     private ImageButton btn_xibei;
     private ImageButton btn_dongbei;
-=======
     private ImageButton btn_西北;
     private ImageButton btn_东北;
->>>>>>> master
     private ImageButton btn_huabei;
     private ImageButton btn_huanan;
     private ImageButton btn_huahzong;

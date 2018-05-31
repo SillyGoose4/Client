@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import connect.database.test.com.clents.R;
+import com.SillyGoose.Activity.R;
 
 
 public class AlbumActivity extends AppCompatActivity {
