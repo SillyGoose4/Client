@@ -17,66 +17,60 @@
         android:background="@drawable/btn_trip"
         />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="19dp"
-
-        android:src="@drawable/goose"
-        android:id="@+id/imageView" />
-
     <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton8"
-        android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/imageButton8"
-        android:background="@drawable/btn_wind" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btn_wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="14dp"
-        android:layout_toStartOf="@+id/imageButton5"
+        android:layout_marginStart="9dp"
+        android:layout_toEndOf="@+id/btn_rain"
+        android:adjustViewBounds="true"
+        android:background="@drawable/btn_wind" />
+
+    <ImageButton
+        android:id="@+id/btn_devil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/btn_moon"
         android:background="@drawable/btn_devil" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/btn_cloud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_album"
-        android:background="@drawable/btn_cloud" />
+        android:background="@drawable/btn_cloud"
+        />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btn_moon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageButton4"
-        android:background="@drawable/btn_moon" />
+        android:layout_toStartOf="@+id/btn_cloud"
+        android:background="@drawable/btn_moon"
+        />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/btn_rain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/btn_rain" />
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_rain"
+        />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btn_sun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/btn_sun" />
+        android:background="@drawable/btn_sun"
+        />
 
     <ImageButton
         android:id="@+id/btn_album"
@@ -84,7 +78,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/btn_album" />
+        android:background="@drawable/btn_album"
+        />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -92,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/btn_return" />
+        android:background="@drawable/btn_return"
+        />
 
 </RelativeLayout>

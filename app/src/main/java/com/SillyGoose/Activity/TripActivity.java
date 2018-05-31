@@ -2,6 +2,7 @@ package com.SillyGoose.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +10,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.SillyGoose.Activity.R;
 
-import connect.database.test.com.clents.R;
+
 public class TripActivity extends AppCompatActivity {
     private ImageButton btn_return;
     private ImageButton btn_album;
+    MediaPlayer mp=new MediaPlayer();
+    private ImageButton btn_xibei;
+    private ImageButton btn_dongbei;
     private ImageButton btn_西北;
     private ImageButton btn_东北;
     private ImageButton btn_huabei;
@@ -26,12 +31,14 @@ public class TripActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mp=MediaPlayer.create(this,R.raw.btn);
         setContentView(R.layout.activity_trip);
         //返回按钮
         btn_return=(ImageButton)findViewById(R.id.btn_return);
        /* btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 Intent it = new Intent(TripActivity.this, MainActivity.class);
                 startActivity(it);
             }
@@ -41,6 +48,7 @@ public class TripActivity extends AppCompatActivity {
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 Intent album = new Intent(TripActivity.this, AlbumActivity.class);
                 startActivity(album);
             }
@@ -77,6 +85,7 @@ public class TripActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
               //**************还没有把高铁参数传给
+                mp.start();
                 ticketshowdailog();
                 dialogInterface.dismiss();
             }
@@ -86,6 +95,7 @@ public class TripActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                // Toast.makeText(TripActivity.this,"以后再说被点击",Toast.LENGTH_SHORT).show();
+                mp.start();
                 dialogInterface.dismiss();
             }
         });
@@ -109,6 +119,7 @@ public class TripActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                mp.start();
                 Toast.makeText(TripActivity.this,"小鹅踏上了去大西北的旅程啦",Toast.LENGTH_SHORT).show();
                 dialogInterface.dismiss();
             }
