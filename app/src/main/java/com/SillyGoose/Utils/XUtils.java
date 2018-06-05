@@ -8,11 +8,6 @@ import com.mob.MobSDK;
 
 import org.xutils.x;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-
 /**
  *
  * Init Android Application
