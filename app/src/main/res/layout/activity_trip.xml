@@ -14,8 +14,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
 
-        android:layout_x="328dp"
-        android:layout_y="0dp"
+        android:layout_x="293dp"
+        android:layout_y="2dp"
         android:background="@drawable/btn_album" />
 
     <ImageButton
@@ -28,75 +28,71 @@
         />
 
     <ImageButton
-        android:id="@+id/btn_dongbei"
+        android:id="@+id/btn_centralchina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="209dp"
+        android:layout_y="295dp"
+        android:background="@drawable/btn_huazhong" />
+
+    <ImageButton
+        android:id="@+id/btn_northeast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/btn_huadong"
         android:layout_alignTop="@+id/btn_huabei"
         android:layout_marginStart="18dp"
-        android:layout_x="178dp"
-        android:layout_y="110dp"
+        android:layout_x="266dp"
+        android:layout_y="168dp"
         android:background="@drawable/btn_dongbei" />
 
     <ImageButton
-        android:id="@+id/btn_huabei"
+        android:id="@+id/btn_northchina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btn_huanan"
-        android:layout_below="@+id/btn_album"
+
         android:layout_marginEnd="16dp"
         android:layout_marginTop="39dp"
-        android:layout_x="117dp"
-        android:layout_y="130dp"
+        android:layout_x="155dp"
+        android:layout_y="175dp"
         android:background="@drawable/btn_huabei" />
 
     <ImageButton
-        android:id="@+id/btn_huadong"
+        android:id="@+id/btn_eastchina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_huazhong"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:layout_x="142dp"
-        android:layout_y="209dp"
+        android:layout_x="239dp"
+        android:layout_y="280dp"
         android:background="@drawable/btn_huadong" />
 
     <ImageButton
-        android:id="@+id/btn_huanan"
+        android:id="@+id/btn_southchina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_alignEnd="@+id/btn_dongbei"
-        android:layout_alignTop="@+id/btn_xinan"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
-        android:layout_x="116dp"
-        android:layout_y="261dp"
+        android:layout_x="187dp"
+        android:layout_y="361dp"
         android:background="@drawable/btn_huanan" />
 
-    <ImageButton
-        android:id="@+id/btn_huazhong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="73dp"
-        android:layout_y="201dp"
-        android:background="@drawable/btn_huazhong" />
-
-
 
     <ImageButton
-        android:id="@+id/btn_xinan"
+        android:id="@+id/btn_southwest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_alignStart="@+id/btn_xibei"
         android:layout_alignTop="@+id/btn_xibei"
         android:layout_marginTop="30dp"
-        android:layout_x="19dp"
-        android:layout_y="206dp"
+        android:layout_x="37dp"
+        android:layout_y="282dp"
         android:background="@drawable/btn_xinan" />
+
     <ImageButton
-        android:id="@+id/btn_xibei"
+        android:id="@+id/btn_northwest"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
@@ -104,10 +100,10 @@
         android:layout_below="@+id/btn_album"
         android:layout_marginStart="26dp"
         android:layout_marginTop="82dp"
-        android:layout_x="18dp"
-        android:layout_y="163dp"
-        android:clickable="true"
+        android:layout_x="25dp"
+        android:layout_y="194dp"
         android:background="@drawable/btn_xibei"
+        android:clickable="true"
         android:visibility="visible" />
 
 </AbsoluteLayout>
