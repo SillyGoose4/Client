@@ -1,18 +1,15 @@
 package com.SillyGoose.Activity;
+
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import com.SillyGoose.Model.OkHttpUnits;
-
-import static com.SillyGoose.Activity.R.*;
-
+import static com.SillyGoose.Activity.R.raw;
 public class MainActivity extends AppCompatActivity {
-    private ImageButton btn_pool;
+    private ImageButton btn_pond;
     private ImageButton btn_trip;
     private ImageButton btn_album;
     MediaPlayer mp=new MediaPlayer();
@@ -22,26 +19,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mp=MediaPlayer.create(this, raw.btn);
         setContentView(R.layout.activity_main);
-        btn_pool=(ImageButton)findViewById(id.btn_pond);
-        btn_pool.setOnClickListener(new View.OnClickListener() {
+
+        btn_pond=(ImageButton)findViewById(R.id.btn_pond);
+        btn_pond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  btn_pool.setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
                 mp.start();
-                Intent maini=new Intent(MainActivity.this,PoolActivity.class);
-                startActivity(maini);
+                Intent in=new Intent(MainActivity.this,PoolActivity.class);
+                startActivity(in);
             }
         });
-        btn_trip=(ImageButton)findViewById(id.btn_airplane);
+
+        btn_trip=(ImageButton)findViewById(R.id.btn_airplane);
         btn_trip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mp.start();
-                    Intent trip=new Intent(MainActivity.this,TripActivity.class);
-                    startActivity(trip);
+                  mp.start();
+                  Intent trip=new Intent(MainActivity.this,TripActivity.class);
+                  startActivity(trip);
                 }
             });
-        btn_album=(ImageButton)findViewById(id.btn_album);
+        btn_album=(ImageButton)findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,5 +51,4 @@ public class MainActivity extends AppCompatActivity {
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
     }
-
 }
