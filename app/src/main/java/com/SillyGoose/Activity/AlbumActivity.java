@@ -1,20 +1,24 @@
 package com.SillyGoose.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
-import com.SillyGoose.Activity.R;
 
 
 public class AlbumActivity extends AppCompatActivity {
+
+
     private ImageButton btn_return;
     MediaPlayer mp=new MediaPlayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_album);
         btn_return=(ImageButton)findViewById(R.id.btn_return);
-        mp=MediaPlayer.create(this,R.raw.btn);
+        mp=MediaPlayer.create(this, R.raw.btn);
+
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,8 +27,8 @@ public class AlbumActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_album);
+
+
     }
     @Override
     public void onBackPressed() {
