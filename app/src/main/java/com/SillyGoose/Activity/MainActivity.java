@@ -7,16 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.SillyGoose.Model.OkHttpUnits;
-import static com.SillyGoose.Activity.R.raw;
-
 import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Status;
 
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
     private ImageButton btn_trip;
     private ImageButton btn_album;
+    public Status appStatus;
+
     MediaPlayer mp=new MediaPlayer();
     //static final int COLOR1 = Color.parseColor("#FFB032");
     @Override
@@ -28,10 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
-
-        btn_pool=(ImageButton)findViewById(R.id.btn_pond);
-        btn_pool.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 mp.start();
@@ -59,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         OkHttpUnits client=OkHttpUnits.getInstance();
-        startActivity(new Intent(MainActivity.this,SignInActivity.class));
+        if(!Status.isIsSignIn()) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
     }
 
 

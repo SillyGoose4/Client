@@ -12,15 +12,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.MessageBox;
+import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Status;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
-import com.SillyGoose.Activity.R;
 
 /**
  * 使用SharedPreferences自动登录以及记住密码
@@ -69,12 +68,24 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 禁用返回键
+     * 按下返回键时调用
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         super.moveTaskToBack(false);
 
     }
+
+    /**
+     * 禁用返回键
+     * 设置
+     * @param keyCode
+     * @param event
+     * @return
+     */
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
@@ -100,7 +111,7 @@ public class SignInActivity extends AppCompatActivity {
                     data.put("Value", "SIGNIN");
                     data.put("Phone", text_Phone.getText().toString());
                     data.put("Passwd", text_Passwd.getText().toString());
-                    messageBox = OkHttpUnits.post("http://192.168.126.131:8080/user/login", data);
+                    messageBox = OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"), data);
                     Message msg = handler.obtainMessage();
                     msg.what = 1;
                     msg.obj = messageBox;
@@ -121,12 +132,16 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         public boolean handleMessage(Message msg) {
+            /*记住密码*/
             if(checkBox_remember.isChecked()){
 
             }
             if(msg.obj == MessageBox.SI_SUCCESS){
                 Toast.makeText(getApplicationContext(), "登录成功",
                         Toast.LENGTH_LONG).show();
+                SignInActivity.this.finish();
+                Status.setIsSignIn(true);
+
             }else if(msg.obj == MessageBox.SI_NOTFIND){
                 Toast.makeText(getApplicationContext(), "未找到用户",
                         Toast.LENGTH_LONG).show();

@@ -8,8 +8,6 @@ import com.mob.MobSDK;
 
 import org.xutils.x;
 
-
-
 /**
  *
  * Init Android Application

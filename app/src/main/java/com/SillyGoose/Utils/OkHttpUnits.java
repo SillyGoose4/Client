@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class OkHttpUnits {
      */
     private static OkHttpUnits httpUnits=null;
     private static MediaType JSON=MediaType.parse("application/json");
-    private static String url="https://";
+    private static String url="http://172.25.32.244:8080";
 
     private OkHttpUnits(){
     }
@@ -83,7 +84,7 @@ public class OkHttpUnits {
     private static Handler mHandler = null;
 
     /**
-     *
+     * Handler类，可惜没有用
      * @return
      */
     public synchronized static Handler getHandler() {
@@ -149,11 +150,13 @@ public class OkHttpUnits {
      * @param params
      * @return
      */
-    public static MessageBox post(String url, JSONObject params) throws IOException{
+    public static MessageBox post(String url, JSONObject params) throws IOException, JSONException {
         MessageBox messageBox = null;
         String postmessage = params.toString();
         RequestBody body = RequestBody.create(JSON,postmessage);
         OkHttpClient client = getClient();
+        JSONObject jsonObject = null;
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
@@ -162,9 +165,10 @@ public class OkHttpUnits {
         Response response = client.newCall(request).execute();
 
         String msg=response.body().string();
-        Log.d(TAG,msg);
+        jsonObject = new JSONObject(msg);
+        Log.d(TAG,"msg is" + msg);
         if(response.isSuccessful()){
-            messageBox = MessageBox.valueOf(msg);
+            messageBox = MessageBox.valueOf(jsonObject.getString("Result"));
         }else{
             messageBox = MessageBox.SYS_NETERR;
         }

@@ -303,4 +303,15 @@ public class TripActivity extends AppCompatActivity {
         builder.show();
 
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
+
+    }
 }
+
+}
+
