@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Model.OkHttpUnits;
+import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.MessageBox;
 import com.mob.MobSDK;
 
@@ -101,6 +101,12 @@ public class SignUpActivity extends AppCompatActivity {
         SMSSDK.unregisterEventHandler(eventHandler);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(true);
+
+    }
 
     /**
      * Check for Passwd and confirm password
