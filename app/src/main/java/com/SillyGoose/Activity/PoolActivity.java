@@ -34,6 +34,7 @@ public class PoolActivity extends AppCompatActivity {
         btn_moon=(ImageButton) findViewById(R.id.btn_moon);
         btn_trip=(ImageButton)findViewById(R.id.btn_airplane);
         btn_album=(ImageButton)findViewById(R.id.btn_album);
+
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

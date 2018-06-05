@@ -7,9 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.SillyGoose.Model.OkHttpUnits;
-import static com.SillyGoose.Activity.R.raw;
-
 import com.SillyGoose.Utils.OkHttpUnits;
 
 
@@ -28,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
-
-        btn_pool=(ImageButton)findViewById(R.id.btn_pond);
-        btn_pool.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 mp.start();
