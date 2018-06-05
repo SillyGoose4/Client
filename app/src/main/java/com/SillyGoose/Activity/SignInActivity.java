@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Status;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,7 +132,7 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         public boolean handleMessage(Message msg) {
-
+            /*记住密码*/
             if(checkBox_remember.isChecked()){
 
             }
@@ -139,6 +140,8 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "登录成功",
                         Toast.LENGTH_LONG).show();
                 SignInActivity.this.finish();
+                Status.setIsSignIn(true);
+
             }else if(msg.obj == MessageBox.SI_NOTFIND){
                 Toast.makeText(getApplicationContext(), "未找到用户",
                         Toast.LENGTH_LONG).show();

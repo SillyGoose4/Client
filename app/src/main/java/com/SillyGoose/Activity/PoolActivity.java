@@ -95,8 +95,7 @@ public class PoolActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        super.moveTaskToBack(true);
-
+        super.moveTaskToBack(false);
     }
 
 }
