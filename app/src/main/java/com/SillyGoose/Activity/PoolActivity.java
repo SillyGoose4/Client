@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.SillyGoose.Activity.R;
-
 public class PoolActivity extends AppCompatActivity {
     private ImageButton btn_return;
     private ImageButton btn_trip;
@@ -24,14 +22,16 @@ public class PoolActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pool);
         mp=MediaPlayer.create(this,R.raw.btn);
         btn_return = (ImageButton) findViewById(R.id.btn_return);
-      /*  btn_rain=(ImageButton) findViewById(R.id. btn_rain);
+        btn_rain=(ImageButton) findViewById(R.id. btn_rain);
         btn_sun=(ImageButton) findViewById(R.id.btn_sun);
         btn_wind=(ImageButton) findViewById(R.id.btn_wind);
         btn_devil=(ImageButton) findViewById(R.id.btn_devil);
         btn_cloud=(ImageButton) findViewById(R.id.btn_cloud);
-        btn_moon=(ImageButton) findViewById(R.id.btn_moon);*/
+        btn_moon=(ImageButton) findViewById(R.id.btn_moon);
         btn_trip=(ImageButton)findViewById(R.id.btn_airplane);
         btn_album=(ImageButton)findViewById(R.id.btn_album);
         btn_return.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class PoolActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
-       /* btn_cloud.setOnClickListener(new View.OnClickListener() {
+        btn_cloud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }
@@ -87,9 +87,8 @@ public class PoolActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             }
-        });*/
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pool);
+        });
+
 
     }
     @Override

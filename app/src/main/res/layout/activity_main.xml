@@ -37,10 +37,9 @@
         android:id="@+id/btn_pond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/btn_album"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_above="@+id/btn_airplane"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="73dp"
         android:background="@drawable/pond" />
 
 </RelativeLayout>
