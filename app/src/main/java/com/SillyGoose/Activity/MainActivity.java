@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+
 import com.SillyGoose.Model.OkHttpUnits;
 import static com.SillyGoose.Activity.R.raw;
+
+import com.SillyGoose.Utils.OkHttpUnits;
+
+
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
     private ImageButton btn_trip;
@@ -17,11 +22,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mp=MediaPlayer.create(this, raw.btn);
+        mp=MediaPlayer.create(this, R.raw.btn);
         setContentView(R.layout.activity_main);
+
 
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
+
+        btn_pool=(ImageButton)findViewById(R.id.btn_pond);
+        btn_pool.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 mp.start();
@@ -51,4 +61,14 @@ public class MainActivity extends AppCompatActivity {
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
+
+    }
+
+
 }
