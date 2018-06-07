@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class SignInActivity extends AppCompatActivity {
     private TextView text_Passwd;
     private CheckBox checkBox_remember;
     private Thread thread;
+
+    private final String TAG = "SignInActivity Called:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +104,26 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void SignIn() {
 
-        Thread myThread = new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "run: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 System.out.println("======================================================================");
                 MessageBox messageBox;
                 JSONObject data = new JSONObject();
+                JSONObject result ;
                 try {
                     data.put("Value", "SIGNIN");
                     data.put("Phone", text_Phone.getText().toString());
                     data.put("Passwd", text_Passwd.getText().toString());
-                    messageBox = OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"), data);
+                    //messageBox = OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"), data);
+                    result = OkHttpUnits.postForGetJSON(OkHttpUnits.setAndGetUrl("/post"),data);
+                    messageBox =MessageBox.valueOf(result.getString("Result"));
+                    if(messageBox == MessageBox.SI_SUCCESS){
+                        // 由于User没用，所以就暂不考虑
+                        // Status.setUser(new User(result.getJSONObject("User").getString("")));
+                        //Status.setCollectTime();
+                    }
                     Message msg = handler.obtainMessage();
                     msg.what = 1;
                     msg.obj = messageBox;
@@ -123,7 +135,7 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
-        myThread.start();
+        thread.start();
 
     }
 
@@ -153,4 +165,11 @@ public class SignInActivity extends AppCompatActivity {
         }
     });
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //thread.stop();
+        Log.d(TAG, "onDestroy: this activity will destroy");
+
+    }
 }
