@@ -1,9 +1,6 @@
-package com.SillyGoose.Utils;
+package com.SillyGoose.Model;
 
-import com.SillyGoose.Model.Album;
-import com.SillyGoose.Model.CollectTime;
-import com.SillyGoose.Model.Goose;
-import com.SillyGoose.Model.User;
+import com.SillyGoose.Utils.Weather;
 
 /**
  * 描述当前状态类 单例模式
@@ -24,6 +21,10 @@ public class Status {
     private static Album album;
 
     private static Weather weather;
+
+    private static double latitude;//纬度
+
+    private static double longitude;//经度
 
     public static Status getStatus() {
         if(status == null){
@@ -67,6 +68,14 @@ public class Status {
         return weather;
     }
 
+    public static double getLatitude() {
+        return latitude;
+    }
+
+    public static double getLongitude() {
+        return longitude;
+    }
+
     public static void setAlbum(Album album) {
         Status.album = album;
     }
@@ -89,5 +98,13 @@ public class Status {
 
     public static void setWeather(Weather weather) {
         Status.weather = weather;
+    }
+
+    public static void setLatitude(double latitude) {
+        Status.latitude = latitude;
+    }
+
+    public static void setLongitude(double longitude) {
+        Status.longitude = longitude;
     }
 }
