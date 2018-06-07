@@ -1,7 +1,12 @@
 package com.SillyGoose.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,12 +15,19 @@ import android.widget.ImageButton;
 import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.Status;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
     private ImageButton btn_trip;
     private ImageButton btn_album;
     public Status appStatus;
+    private Thread getWeather;
 
     MediaPlayer mp=new MediaPlayer();
     //static final int COLOR1 = Color.parseColor("#FFB032");
@@ -54,9 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
+
+        /*  loading current status   */
+        // get OkHttp instance
         OkHttpUnits client=OkHttpUnits.getInstance();
+        // If not Sign In ~
         if(!Status.isIsSignIn()) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }else {
+
         }
     }
 

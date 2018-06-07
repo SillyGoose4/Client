@@ -23,6 +23,7 @@ public class Status {
 
     private static Album album;
 
+    private static Weather weather;
 
     public static Status getStatus() {
         if(status == null){
@@ -62,6 +63,10 @@ public class Status {
         return user;
     }
 
+    public static Weather getWeather() {
+        return weather;
+    }
+
     public static void setAlbum(Album album) {
         Status.album = album;
     }
@@ -82,4 +87,7 @@ public class Status {
         Status.user = user;
     }
 
+    public static void setWeather(Weather weather) {
+        Status.weather = weather;
+    }
 }

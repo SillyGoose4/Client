@@ -175,6 +175,14 @@ public class OkHttpUnits {
         return messageBox;
     }
 
+    /**
+     * Async Post
+     * @param url
+     * @param data
+     * @param call
+     * @return
+     * @throws IOException
+     */
     public static MessageBox post(String url, JSONObject data,Callback call) throws IOException{
         MessageBox messageBox = null;
         String postmessage = data.toString();
@@ -191,5 +199,25 @@ public class OkHttpUnits {
 
 
         return messageBox;
+    }
+
+    public static JSONObject postForGetJSON(String url, JSONObject params) throws IOException, JSONException {
+        MessageBox messageBox = null;
+        String postmessage = params.toString();
+        RequestBody body = RequestBody.create(JSON,postmessage);
+        OkHttpClient client = getClient();
+        JSONObject jsonObject = null;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String msg=response.body().string();
+        jsonObject = new JSONObject(msg);
+        Log.d(TAG,"msg is" + msg);
+        return jsonObject;
     }
 }

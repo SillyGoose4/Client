@@ -312,6 +312,3 @@ public class TripActivity extends AppCompatActivity {
 
     }
 }
-
-}
-

@@ -89,8 +89,6 @@ public class PoolActivity extends AppCompatActivity {
             public void onClick(View view) {
             }
         });
-
-
     }
     @Override
     public void onBackPressed() {
