@@ -201,6 +201,14 @@ public class OkHttpUnits {
         return messageBox;
     }
 
+    /**
+     * Sync Post method but return JSON data
+     * @param url
+     * @param params
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
     public static JSONObject postForGetJSON(String url, JSONObject params) throws IOException, JSONException {
         MessageBox messageBox = null;
         String postmessage = params.toString();

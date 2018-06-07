@@ -1,9 +1,10 @@
 package com.SillyGoose.Utils;
 
 import android.app.Application;
-import android.media.MediaPlayer;
+import android.content.Intent;
 
-import com.SillyGoose.Activity.R;
+import com.SillyGoose.Activity.BgmService;
+import com.SillyGoose.Model.Status;
 import com.mob.MobSDK;
 
 import org.xutils.x;
@@ -14,15 +15,21 @@ import org.xutils.x;
  * Created by wangj on 4/2/2018.
  */
 
-public class XUtils extends Application {
-    private MediaPlayer mp=new MediaPlayer();
+public class StartUtils extends Application {
+
+
+
     public void onCreate(){
-        mp=MediaPlayer.create(this, R.raw.goose);
-        mp.start();
-        mp.setLooping(true);
+
         super.onCreate();
+        /*  init Mob SDK    */
         x.Ext.init(this);
         MobSDK.init(this,"250a858a8f300","d68d12a22c4e5d8e1f677f92bdc79062");
+
+        Intent bgmIntent = new Intent(StartUtils.this, BgmService.class);
+        startService(bgmIntent);
+
+        Status status=Status.getStatus();
     }
 
 }

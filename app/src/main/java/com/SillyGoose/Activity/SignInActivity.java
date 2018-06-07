@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
-import com.SillyGoose.Utils.Status;
+import com.SillyGoose.Model.Status;
+import com.baidu.location.LocationClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView text_Passwd;
     private CheckBox checkBox_remember;
     private Thread thread;
+    private LocationClient location = null;
 
     private final String TAG = "SignInActivity Called:";
 
@@ -43,6 +45,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
 
 
         /* initizalize */
@@ -173,3 +176,4 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 }
+
