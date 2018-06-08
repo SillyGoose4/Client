@@ -3,6 +3,7 @@ package com.SillyGoose.Utils;
 import com.SillyGoose.Model.Status;
 import com.show.api.ShowApiRequest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -22,7 +23,7 @@ public class Weather {
     }
 
 
-    public static Weather getCurrWeather() {
+    public static Weather getCurrentWeather() {
         if(CurrentWeather == null){
             synchronized (Weather.class){
                 CurrentWeather = new Weather();
@@ -47,10 +48,14 @@ public class Weather {
                         .addTextPara("need3HourForcast", "0")
                         .addTextPara("needAlarm", "0")
                         .post();
-
+                try {
+                    setData(new JSONObject(res));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(res);
             }
-        });
+        }).start();
     }
 
     public static JSONObject getData() {
