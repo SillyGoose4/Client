@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.SillyGoose.Model.Status;
+import com.SillyGoose.Utils.LocationInfo;
 import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Weather;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Thread getWeather;
 
     MediaPlayer mp=new MediaPlayer();
-
+    public LocationClient mLocationClient = null;
+    private LocationInfo myListener = new LocationInfo();
 
     //static final int COLOR1 = Color.parseColor("#FFB032");
     @Override
@@ -65,6 +70,24 @@ public class MainActivity extends AppCompatActivity {
         if(!Status.isIsSignIn()) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
+        mLocationClient = new LocationClient(getApplicationContext());
+        //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(0);
+        option.setOpenGps(true);
+        option.setIgnoreKillProcess(false);
+        option.SetIgnoreCacheException(false);
+        option.setWifiCacheTimeOut(5*60*1000);
+        option.setEnableSimulateGps(false);
+        mLocationClient.setLocOption(option);
+        mLocationClient.requestLocation();
+        mLocationClient.start();
+        //mLocationClient.stop();
+        Weather.getWeather();
+
 
     }
 
@@ -77,13 +100,5 @@ public class MainActivity extends AppCompatActivity {
         super.moveTaskToBack(false);
     }
 
-    /**
-     * 开始加载百度MapAPI
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 }
 

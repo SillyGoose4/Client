@@ -41,8 +41,7 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox checkBox_remember;
     private Thread thread;
     private LocationClient location = null;
-    public LocationClient mLocationClient = null;
-    private LocationInfo myListener = new LocationInfo();
+
 
     private final String TAG = "SignInActivity Called:";
 

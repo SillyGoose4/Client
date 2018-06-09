@@ -1,5 +1,7 @@
 package com.SillyGoose.Utils;
 
+import android.util.Log;
+
 import com.SillyGoose.Model.Status;
 import com.show.api.ShowApiRequest;
 
@@ -38,13 +40,12 @@ public class Weather {
             public void run() {
                 String appid="66782";//要替换成自己的
                 String secret="ec285e3435a64398bf26781b0bc054d4";//要替换成自己的
-                final String res=new ShowApiRequest( "http://route.showapi.com/9-5", appid, secret)
-                        .addTextPara("from", "5")
-                        .addTextPara("lng", String.valueOf(Status.getLongitude()))
-                        .addTextPara("lat", String.valueOf(Status.getLatitude()))
+                Log.d("Longitude", "run: "+String.valueOf(Status.getLongitude()));
+                Log.d("Latitude","run "+String.valueOf(Status.getLatitude()));
+                final String res=new ShowApiRequest( "http://route.showapi.com/9-4", appid, secret)
                         .addTextPara("needMoreDay", "0")
                         .addTextPara("needIndex", "0")
-                        .addTextPara("needHourData", "0")
+                        .addTextPara("needHourData", "1")
                         .addTextPara("need3HourForcast", "0")
                         .addTextPara("needAlarm", "0")
                         .post();
