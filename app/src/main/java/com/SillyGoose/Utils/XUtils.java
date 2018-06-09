@@ -19,7 +19,6 @@ import org.xutils.x;
 public class XUtils extends Application {
     private MediaPlayer mp=new MediaPlayer();
     public void onCreate(){
-
         mp=MediaPlayer.create(this, R.raw.goose);
         mp.start();
         mp.setLooping(true);

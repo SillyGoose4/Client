@@ -1,10 +1,8 @@
-package com.SillyGoose.Model;
+package com.SillyGoose.Utils;
 
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
-
-import com.SillyGoose.Utils.MessageBox;
 
 import org.json.JSONObject;
 
@@ -37,6 +35,8 @@ public class OkHttpUnits {
      */
     private static OkHttpUnits httpUnits=null;
     private static MediaType JSON=MediaType.parse("application/json");
+    private static String url="https://";
+
     private OkHttpUnits(){
     }
     public static OkHttpUnits getInstance(){
@@ -82,6 +82,10 @@ public class OkHttpUnits {
     }
     private static Handler mHandler = null;
 
+    /**
+     *
+     * @return
+     */
     public synchronized static Handler getHandler() {
         if (mHandler == null) {
             mHandler = new Handler();
@@ -89,6 +93,17 @@ public class OkHttpUnits {
 
         return mHandler;
     }
+
+
+    /**
+     * 这里由于url域名部分不变，所以如此设置
+     * @param params url 后缀(域名/后部分)
+     * @return  拼接后url；
+     */
+    public static String setAndGetUrl(String params){
+        return url+params;
+    }
+
 
     /**
      * Async Get Method
