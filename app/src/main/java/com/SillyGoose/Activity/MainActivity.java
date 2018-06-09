@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
-
-
         /*  loading current status   */
         // get OkHttp instance
         OkHttpUnits client=OkHttpUnits.getInstance();

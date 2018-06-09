@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Model.User;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Model.Status;
@@ -124,6 +125,13 @@ public class SignInActivity extends AppCompatActivity {
                     messageBox =MessageBox.valueOf(result.getString("Result"));
                     if(messageBox == MessageBox.SI_SUCCESS){
                         // 由于User没用，所以就暂不考虑
+                        User recive = new User();
+                        recive.setUserId(result.getJSONObject("User").getInt("userId"));
+                        recive.setUserName(result.getJSONObject("User").getString("userName"));
+                        recive.setUserPasswd(result.getJSONObject("User").getString("userPasswd"));
+                        recive.setUserPhone(result.getJSONObject("User").getString("userPhone"));
+                        Status.setUser(recive);
+
                         // Status.setUser(new User(result.getJSONObject("User").getString("")));
                         //Status.setCollectTime();
                     }
