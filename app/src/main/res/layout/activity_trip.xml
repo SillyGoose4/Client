@@ -16,7 +16,9 @@
 
         android:layout_x="328dp"
         android:layout_y="0dp"
-        android:background="@drawable/btn_album" />
+        android:background="@drawable/btn_album"
+        android:stateListAnimator="@drawable/btn_album"
+        />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -25,6 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_return"
+        android:stateListAnimator="@drawable/btn_return"
         />
 
     <ImageButton
@@ -36,7 +39,9 @@
         android:layout_marginStart="18dp"
         android:layout_x="178dp"
         android:layout_y="110dp"
-        android:background="@drawable/btn_dongbei" />
+        android:background="@drawable/btn_dongbei"
+        android:stateListAnimator="@drawable/btn_dongbei"
+        />
 
     <ImageButton
         android:id="@+id/btn_huabei"
@@ -48,7 +53,9 @@
         android:layout_marginTop="39dp"
         android:layout_x="117dp"
         android:layout_y="130dp"
-        android:background="@drawable/btn_huabei" />
+        android:background="@drawable/btn_huabei"
+        android:stateListAnimator="@drawable/btn_huabei"
+        />
 
     <ImageButton
         android:id="@+id/btn_huadong"
@@ -59,7 +66,9 @@
         android:layout_marginTop="8dp"
         android:layout_x="142dp"
         android:layout_y="209dp"
-        android:background="@drawable/btn_huadong" />
+        android:background="@drawable/btn_huadong"
+        android:stateListAnimator="@drawable/btn_huadong"
+        />
 
     <ImageButton
         android:id="@+id/btn_huanan"
@@ -72,7 +81,9 @@
         android:layout_marginTop="30dp"
         android:layout_x="116dp"
         android:layout_y="261dp"
-        android:background="@drawable/btn_huanan" />
+        android:background="@drawable/btn_huanan"
+        android:stateListAnimator="@drawable/btn_huanan"
+        />
 
     <ImageButton
         android:id="@+id/btn_huazhong"
@@ -80,7 +91,9 @@
         android:layout_height="wrap_content"
         android:layout_x="73dp"
         android:layout_y="201dp"
-        android:background="@drawable/btn_huazhong" />
+        android:background="@drawable/btn_huazhong"
+        android:stateListAnimator="@drawable/btn_huazhong"
+        />
 
     <ImageButton
         android:id="@+id/btn_xibei"
@@ -93,7 +106,9 @@
         android:layout_marginTop="82dp"
         android:layout_x="18dp"
         android:layout_y="163dp"
-        android:background="@drawable/btn_xibei" />
+        android:background="@drawable/btn_xibei"
+        android:stateListAnimator="@drawable/btn_xibei"
+        />
 
     <ImageButton
         android:id="@+id/btn_xinan"
@@ -105,7 +120,9 @@
         android:layout_marginTop="30dp"
         android:layout_x="19dp"
         android:layout_y="206dp"
-        android:background="@drawable/btn_xinan" />
+        android:background="@drawable/btn_xinan"
+        android:stateListAnimator="@drawable/btn_xinan"
+        />
     <ImageView
         android:id="@+id/t_002"
         android:layout_width="wrap_content"

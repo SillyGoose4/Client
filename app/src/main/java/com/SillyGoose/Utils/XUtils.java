@@ -3,11 +3,12 @@ package com.SillyGoose.Utils;
 import android.app.Application;
 import android.media.MediaPlayer;
 
+import com.SillyGoose.Activity.R;
 import com.mob.MobSDK;
 
 import org.xutils.x;
 
-import connect.database.test.com.clents.R;
+
 
 /**
  *

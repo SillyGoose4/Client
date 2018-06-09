@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import com.SillyGoose.Model.OkHttpUnits;
-
+import android.widget.Toast;
 import static com.SillyGoose.Activity.R.*;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pool;
     private ImageButton btn_trip;
     private ImageButton btn_album;
+    private long mExitTime = System.currentTimeMillis();
     MediaPlayer mp=new MediaPlayer();
     //static final int COLOR1 = Color.parseColor("#FFB032");
     @Override
@@ -53,5 +54,17 @@ public class MainActivity extends AppCompatActivity {
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
     }
-
+    private void toast(String content){
+        Toast.makeText(getApplicationContext(),content,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - mExitTime < 800) {
+            MainActivity.this.finish();   //关闭本活动页面
+        }
+        else{
+            toast("再按返回键退出！");
+            mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
+        }
+    }
 }

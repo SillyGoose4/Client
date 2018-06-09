@@ -7,11 +7,14 @@
     android:background="@drawable/album"
     tools:context="com.SillyGoose.Activity.AlbumActivity">
 
+
+
     <ImageButton
         android:id="@+id/btn_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_return"
+        android:stateListAnimator="@drawable/btn_return"
         />
 
 </RelativeLayout>
