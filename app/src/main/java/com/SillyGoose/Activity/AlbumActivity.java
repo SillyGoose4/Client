@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+<<<<<<< HEAD
+=======
 import java.util.ArrayList;
 import java.util.List;
+>>>>>>> 9cb625e096dbb6c7d866bcfedb337fa80d457fe2
 
 
 public class AlbumActivity extends AppCompatActivity {

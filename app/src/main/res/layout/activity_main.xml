@@ -15,7 +15,10 @@
         android:layout_below="@+id/btn_album"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
-        android:background="@drawable/pond" /-->
+        android:background="@drawable/pond"
+        android:stateListAnimator="@drawable/btn_pond"
+
+        /-->
 
     <ImageButton
         android:id="@+id/btn_album"

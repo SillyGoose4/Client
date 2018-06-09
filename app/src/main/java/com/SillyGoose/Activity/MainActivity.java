@@ -7,19 +7,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.SillyGoose.Model.OkHttpUnits;
+
+import android.widget.Toast;
+import static com.SillyGoose.Activity.R.*;
+
+import static com.SillyGoose.Activity.R.raw;
+
 import com.SillyGoose.Utils.LocationInfo;
+
 import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Model.Status;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 
-
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
     private ImageButton btn_trip;
     private ImageButton btn_album;
+
+    private long mExitTime = System.currentTimeMillis();
+
     public Status appStatus;
     private Thread getWeather;
+
 
     MediaPlayer mp=new MediaPlayer();
     public LocationClient mLocationClient = null;
@@ -65,11 +76,25 @@ public class MainActivity extends AppCompatActivity {
         /*  loading current status   */
         // get OkHttp instance
         OkHttpUnits client=OkHttpUnits.getInstance();
+        startActivity(new Intent(MainActivity.this,SignInActivity.class));
+    }
+    private void toast(String content){
+        Toast.makeText(getApplicationContext(),content,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - mExitTime < 800) {
+            MainActivity.this.finish();   //关闭本活动页面
+        }
+        else{
+            toast("再按返回键退出！");
+            mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
+        }
+    }
         // If not Sign In ~
         if(!Status.isIsSignIn()) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
-
     }
 
     @Override
@@ -101,5 +126,6 @@ public class MainActivity extends AppCompatActivity {
         mLocationClient.start();
         //mLocationClient.stop();
     }
+
 }
 
