@@ -15,6 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_trip"
+        android:stateListAnimator="@drawable/btn_trip"
         />
 
     <ImageButton
@@ -25,7 +26,9 @@
         android:layout_marginStart="9dp"
         android:layout_toEndOf="@+id/btn_rain"
         android:adjustViewBounds="true"
-        android:background="@drawable/btn_wind" />
+        android:background="@drawable/btn_wind"
+        android:stateListAnimator="@drawable/btn_wind"
+        />
 
     <ImageButton
         android:id="@+id/btn_devil"
@@ -33,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_moon"
-        android:background="@drawable/btn_devil" />
+        android:background="@drawable/btn_devil"
+        android:stateListAnimator="@drawable/btn_devil"
+        />
 
     <ImageButton
         android:id="@+id/btn_cloud"
@@ -42,6 +47,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_album"
         android:background="@drawable/btn_cloud"
+        android:stateListAnimator="@drawable/btn_cloud"
         />
 
     <ImageButton
@@ -51,6 +57,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_cloud"
         android:background="@drawable/btn_moon"
+        android:stateListAnimator="@drawable/btn_moon"
         />
 
     <ImageButton
@@ -61,6 +68,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:background="@drawable/btn_rain"
+        android:stateListAnimator="@drawable/btn_rain"
         />
 
     <ImageButton
@@ -70,6 +78,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_sun"
+        android:stateListAnimator="@drawable/btn_sun"
         />
 
     <ImageButton
@@ -79,6 +88,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_album"
+        android:stateListAnimator="@drawable/btn_album"
         />
 
     <ImageButton
@@ -88,6 +98,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_return"
+        android:stateListAnimator="@drawable/btn_return"
         />
 
 </RelativeLayout>

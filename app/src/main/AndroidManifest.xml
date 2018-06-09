@@ -60,7 +60,9 @@
         <activity android:name=".PoolActivity" />
         <activity android:name=".TripActivity" />
         <activity android:name=".AlbumActivity" />
+        <activity android:name="sillyGoose.com.activity_btnclick" />
 
+        <uses-library android:name="com.google.android.things" />
         <service
             android:name=".BgmService"
             android:enabled="true"
