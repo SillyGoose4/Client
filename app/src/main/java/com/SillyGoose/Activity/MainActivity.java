@@ -6,20 +6,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
-
-import com.SillyGoose.Model.OkHttpUnits;
-
 import android.widget.Toast;
-import static com.SillyGoose.Activity.R.*;
 
-import static com.SillyGoose.Activity.R.raw;
-
-import com.SillyGoose.Utils.LocationInfo;
-
-import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Model.Status;
+import com.SillyGoose.Utils.LocationInfo;
+import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+
+
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
@@ -72,24 +68,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         /*  loading current status   */
         // get OkHttp instance
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
-    }
    
         // If not Sign In ~
         if(!Status.isIsSignIn()) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
     }
-
     private void toast(String content){
-        Toast.makeText(getApplicationContext(),content,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),content, Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
         if(System.currentTimeMillis() - mExitTime < 800) {
             MainActivity.this.finish();   //关闭本活动页面
         }
@@ -106,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
-
         option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
         option.setCoorType("bd09ll");
         option.setScanSpan(0);
@@ -116,11 +110,12 @@ public class MainActivity extends AppCompatActivity {
         option.setWifiCacheTimeOut(5*60*1000);
         option.setEnableSimulateGps(false);
         mLocationClient.setLocOption(option);
-
         mLocationClient.requestLocation();
         mLocationClient.start();
         //mLocationClient.stop();
-    }
+        Weather.getWeather();
 
+
+    }
 }
 

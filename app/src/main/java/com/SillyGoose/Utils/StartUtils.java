@@ -26,10 +26,14 @@ public class StartUtils extends Application {
         x.Ext.init(this);
         MobSDK.init(this,"250a858a8f300","d68d12a22c4e5d8e1f677f92bdc79062");
 
+        /*  init Background Music Service */
         Intent bgmIntent = new Intent(StartUtils.this, BgmService.class);
         startService(bgmIntent);
 
+        /*  initialize  Units class */
         Status status=Status.getStatus();
+        ActivityUnits activityUnits=ActivityUnits.getInstance();
+
     }
 
 }

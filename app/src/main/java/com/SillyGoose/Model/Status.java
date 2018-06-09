@@ -96,10 +96,6 @@ public class Status {
         Status.user = user;
     }
 
-    public static void setWeather(Weather weather) {
-        Status.weather = weather;
-    }
-
     public static void setLatitude(double latitude) {
         Status.latitude = latitude;
     }

@@ -13,10 +13,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Utils.LocationInfo;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Model.Status;
+import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,7 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox checkBox_remember;
     private Thread thread;
     private LocationClient location = null;
+
 
     private final String TAG = "SignInActivity Called:";
 
@@ -173,6 +177,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onDestroy();
         //thread.stop();
         Log.d(TAG, "onDestroy: this activity will destroy");
+
 
     }
 }
