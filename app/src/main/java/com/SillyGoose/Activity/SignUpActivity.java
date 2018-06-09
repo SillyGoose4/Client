@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.MessageBox;
+import com.SillyGoose.Utils.OkHttpUnits;
 import com.mob.MobSDK;
 
 import org.json.JSONException;
@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import com.SillyGoose.Activity.R;
 
 /**
  * 使用 MOB提供的sdk 手机短信验证
@@ -244,10 +243,10 @@ public class SignUpActivity extends AppCompatActivity {
                             Message msg=Msghandler.obtainMessage();
                             try {
                                 json.put("Value", "SIGNUP");
-                                json.put("UserName",name.getText().toString());
+                                json.put("Name",name.getText().toString());
                                 json.put("Passwd",passwd.getText().toString()); //  非加密密码 明文传输需要更改
                                 json.put("Phone",phone.getText().toString());
-                                message = OkHttpUnits.post("http://192.168.126.131:8080/user/login", json);
+                                message = OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"), json);
                                 Log.d("Message value", "run: "+message);
                                 msg.what = 2;
                                 msg.obj = message;

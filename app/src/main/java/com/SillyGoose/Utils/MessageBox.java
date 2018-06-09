@@ -6,20 +6,23 @@ package com.SillyGoose.Utils;
  */
 
 public enum MessageBox {
-    /* -*- SignIn -*- */
+    /*  -*- SignIn  -*- */
     SI_SUCCESS("SignIn Success"),
     SI_FAIL("SignIn Fail"),
     SI_MISS("Sign Miss"),
     SI_NOTFIND("SignIn NotFind"),
     SI_PASSWORDWRONG("SignIn Password Wrong"),
     SI_ANOTHERPLACE("SignIn AnotherPlace"),
-    /* -*- SignUp -* -*/
+    /*  -*- SignUp  -*-   */
     SU_SUCCESS("SignUp Succcess"),
     SU_FAIL("SignUp Fail"),
     SU_NOTMATCH("SignUp NotMatch"),
-    /* -*- System Error -*- */
+    /*   -*-   System Error  -*-  */
     SYS_NETERR("System NetErr"),
     SYS_MAINTAIN("System Maintain");
+
+    /* -*-  Weather     -*-  */
+
 
     MessageBox(String message){
 

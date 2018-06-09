@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -12,15 +13,15 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.MessageBox;
+import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Model.Status;
+import com.baidu.location.LocationClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
-import com.SillyGoose.Activity.R;
 
 /**
  * 使用SharedPreferences自动登录以及记住密码
@@ -36,11 +37,15 @@ public class SignInActivity extends AppCompatActivity {
     private TextView text_Passwd;
     private CheckBox checkBox_remember;
     private Thread thread;
+    private LocationClient location = null;
+
+    private final String TAG = "SignInActivity Called:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
 
 
         /* initizalize */
@@ -69,12 +74,24 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 禁用返回键
+     * 按下返回键时调用
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         super.moveTaskToBack(false);
 
     }
+
+    /**
+     * 禁用返回键
+     * 设置
+     * @param keyCode
+     * @param event
+     * @return
+     */
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
@@ -90,17 +107,26 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void SignIn() {
 
-        Thread myThread = new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "run: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 System.out.println("======================================================================");
                 MessageBox messageBox;
                 JSONObject data = new JSONObject();
+                JSONObject result ;
                 try {
                     data.put("Value", "SIGNIN");
                     data.put("Phone", text_Phone.getText().toString());
                     data.put("Passwd", text_Passwd.getText().toString());
-                    messageBox = OkHttpUnits.post("http://192.168.126.131:8080/user/login", data);
+                    //messageBox = OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"), data);
+                    result = OkHttpUnits.postForGetJSON(OkHttpUnits.setAndGetUrl("/post"),data);
+                    messageBox =MessageBox.valueOf(result.getString("Result"));
+                    if(messageBox == MessageBox.SI_SUCCESS){
+                        // 由于User没用，所以就暂不考虑
+                        // Status.setUser(new User(result.getJSONObject("User").getString("")));
+                        //Status.setCollectTime();
+                    }
                     Message msg = handler.obtainMessage();
                     msg.what = 1;
                     msg.obj = messageBox;
@@ -112,7 +138,7 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
-        myThread.start();
+        thread.start();
 
     }
 
@@ -121,12 +147,16 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         public boolean handleMessage(Message msg) {
+            /*记住密码*/
             if(checkBox_remember.isChecked()){
 
             }
             if(msg.obj == MessageBox.SI_SUCCESS){
                 Toast.makeText(getApplicationContext(), "登录成功",
                         Toast.LENGTH_LONG).show();
+                SignInActivity.this.finish();
+                Status.setIsSignIn(true);
+
             }else if(msg.obj == MessageBox.SI_NOTFIND){
                 Toast.makeText(getApplicationContext(), "未找到用户",
                         Toast.LENGTH_LONG).show();
@@ -138,4 +168,12 @@ public class SignInActivity extends AppCompatActivity {
         }
     });
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //thread.stop();
+        Log.d(TAG, "onDestroy: this activity will destroy");
+
+    }
 }
+

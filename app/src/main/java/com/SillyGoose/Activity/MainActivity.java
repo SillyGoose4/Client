@@ -8,22 +8,34 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.SillyGoose.Model.OkHttpUnits;
-<<<<<<< HEAD
+
 import android.widget.Toast;
 import static com.SillyGoose.Activity.R.*;
-=======
+
 import static com.SillyGoose.Activity.R.raw;
 
-import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.LocationInfo;
 
->>>>>>> 9cb625e096dbb6c7d866bcfedb337fa80d457fe2
+import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Model.Status;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton btn_pond;
     private ImageButton btn_trip;
     private ImageButton btn_album;
+
     private long mExitTime = System.currentTimeMillis();
+
+    public Status appStatus;
+    private Thread getWeather;
+
+
     MediaPlayer mp=new MediaPlayer();
+    public LocationClient mLocationClient = null;
+    private LocationInfo myListener = new LocationInfo();
+
     //static final int COLOR1 = Color.parseColor("#FFB032");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +43,8 @@ public class MainActivity extends AppCompatActivity {
         mp=MediaPlayer.create(this, R.raw.btn);
         setContentView(R.layout.activity_main);
 
-
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
-
-        btn_pool=(ImageButton)findViewById(R.id.btn_pond);
-        btn_pool.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 mp.start();
@@ -64,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
+
+
+        /*  loading current status   */
+        // get OkHttp instance
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
     }
-<<<<<<< HEAD
     private void toast(String content){
         Toast.makeText(getApplicationContext(),content,Toast.LENGTH_SHORT).show();
     }
@@ -81,8 +91,11 @@ public class MainActivity extends AppCompatActivity {
             mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
         }
     }
-=======
-
+        // If not Sign In ~
+        if(!Status.isIsSignIn()) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -90,7 +103,29 @@ public class MainActivity extends AppCompatActivity {
         super.moveTaskToBack(false);
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        /*  init BaiduMap SDK   */
+        mLocationClient = new LocationClient(getApplicationContext());
+        //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);
+        LocationClientOption option = new LocationClientOption();
 
+        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(0);
+        option.setOpenGps(true);
+        option.setIgnoreKillProcess(false);
+        option.SetIgnoreCacheException(false);
+        option.setWifiCacheTimeOut(5*60*1000);
+        option.setEnableSimulateGps(false);
+        mLocationClient.setLocOption(option);
 
->>>>>>> 9cb625e096dbb6c7d866bcfedb337fa80d457fe2
+        mLocationClient.requestLocation();
+        mLocationClient.start();
+        //mLocationClient.stop();
+    }
+
 }
+

@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'SillyGoose'
+            keyPassword 'SillyGoose4d'
+            storeFile file('C:/Users/wangj/Documents/Android Jks/SillyGoose.jks')
+            storePassword 'SillyGoose4d'
+        }
+    }
     compileSdkVersion 26
     //buildToolsVersion "26.0.3"
     defaultConfig {
@@ -16,6 +24,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs 'libs'
         }
     }
 }
@@ -26,11 +40,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.xutils:xutils:3.2.2'
@@ -41,6 +54,8 @@ dependencies {
     compile 'com.squareup.okio:okio:1.7.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.google.code.gson:gson:2.8.2'
+    implementation files('libs/showapi_sdk.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
 }
 // 在MobSDK的扩展中注册CMSSDK的相关信息
 
