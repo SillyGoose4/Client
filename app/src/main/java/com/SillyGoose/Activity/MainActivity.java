@@ -78,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
         OkHttpUnits client=OkHttpUnits.getInstance();
         startActivity(new Intent(MainActivity.this,SignInActivity.class));
     }
+   
+        // If not Sign In ~
+        if(!Status.isIsSignIn()) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
+    }
+
     private void toast(String content){
         Toast.makeText(getApplicationContext(),content,Toast.LENGTH_SHORT).show();
     }
@@ -90,18 +97,6 @@ public class MainActivity extends AppCompatActivity {
             toast("再按返回键退出！");
             mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
         }
-    }
-        // If not Sign In ~
-        if(!Status.isIsSignIn()) {
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        super.moveTaskToBack(false);
-
     }
     @Override
     public void onStart() {
