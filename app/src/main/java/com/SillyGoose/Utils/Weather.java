@@ -51,6 +51,8 @@ public class Weather {
                         .post();
                 try {
                     setData(new JSONObject(res));
+                    Log.d("weather:",res);
+                    System.out.println(res);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

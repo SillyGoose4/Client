@@ -13,13 +13,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.SillyGoose.Utils.LocationInfo;
+import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
-import com.SillyGoose.Model.Status;
-import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,12 +157,14 @@ public class SignInActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 SignInActivity.this.finish();
                 Status.setIsSignIn(true);
-
             }else if(msg.obj == MessageBox.SI_NOTFIND){
                 Toast.makeText(getApplicationContext(), "未找到用户",
                         Toast.LENGTH_LONG).show();
             }else if(msg.obj == MessageBox.SI_PASSWORDWRONG){
                 Toast.makeText(getApplicationContext(), "密码错误",
+                        Toast.LENGTH_LONG).show();
+            }else if(msg.obj == MessageBox.SI_ALREADYSIGNIN){
+                Toast.makeText(getApplicationContext(), "该用户已登录",
                         Toast.LENGTH_LONG).show();
             }
             return false;

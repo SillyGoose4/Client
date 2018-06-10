@@ -10,11 +10,9 @@ import android.widget.Toast;
 
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.LocationInfo;
-import com.SillyGoose.Utils.OkHttpUnits;
 import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mp=MediaPlayer.create(this, R.raw.btn);
         setContentView(R.layout.activity_main);
-
+        /*  */
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                   Intent trip=new Intent(MainActivity.this,TripActivity.class);
                   startActivity(trip);
                 }
-            });
+        });
+
         btn_album=(ImageButton)findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,33 +68,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /*  loading current status   */
-        // get OkHttp instance
-        OkHttpUnits client=OkHttpUnits.getInstance();
-        startActivity(new Intent(MainActivity.this,SignInActivity.class));
-   
+
         // If not Sign In ~
         if(!Status.isIsSignIn()) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
-    }
-    private void toast(String content){
-        Toast.makeText(getApplicationContext(),content, Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        super.moveTaskToBack(false);
-        if(System.currentTimeMillis() - mExitTime < 800) {
-            MainActivity.this.finish();   //关闭本活动页面
-        }
-        else{
-            toast("再按返回键退出！");
-            mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
-        }
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
         /*  init BaiduMap SDK   */
         mLocationClient = new LocationClient(getApplicationContext());
         //声明LocationClient类
@@ -114,8 +91,26 @@ public class MainActivity extends AppCompatActivity {
         mLocationClient.start();
         //mLocationClient.stop();
         Weather.getWeather();
+    }
 
-
+    private void toast(String content){
+        Toast.makeText(getApplicationContext(),content, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        super.moveTaskToBack(false);
+        if(System.currentTimeMillis() - mExitTime < 800) {
+            MainActivity.this.finish();   //关闭本活动页面
+        }
+        else{
+            toast("再按返回键退出！");
+            mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
+        }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }
 

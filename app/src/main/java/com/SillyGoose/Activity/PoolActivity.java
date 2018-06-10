@@ -26,7 +26,7 @@ public class PoolActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pool);
         mp=MediaPlayer.create(this,R.raw.btn);
         btn_return = (ImageButton) findViewById(R.id.btn_return);
-        btn_rain=(ImageButton) findViewById(R.id. btn_rain);
+        btn_rain=(ImageButton) findViewById(R.id.btn_rain);
         btn_sun=(ImageButton) findViewById(R.id.btn_sun);
         btn_wind=(ImageButton) findViewById(R.id.btn_wind);
         btn_devil=(ImageButton) findViewById(R.id.btn_devil);
@@ -39,8 +39,7 @@ public class PoolActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent it=new Intent(PoolActivity.this,MainActivity.class);
-                startActivity(it);
+                finish();
             }
         });
         btn_trip.setOnClickListener(new View.OnClickListener() {

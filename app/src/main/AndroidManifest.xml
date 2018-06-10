@@ -47,6 +47,10 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+        <service
+            android:name=".BgmService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -60,13 +64,8 @@
         <activity android:name=".PoolActivity" />
         <activity android:name=".TripActivity" />
         <activity android:name=".AlbumActivity" />
-        <activity android:name="sillyGoose.com.activity_btnclick" />
+        <activity android:name=".activity_btnclick" />
 
-        <uses-library android:name="com.google.android.things" />
-        <service
-            android:name=".BgmService"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>

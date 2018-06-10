@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 
-import java.io.IOException;
-
 public class BgmService extends Service {
 
     private MediaPlayer mp;
@@ -67,12 +65,8 @@ public class BgmService extends Service {
             // 将音乐保存在res/raw/xingshu.mp3,R.java中自动生成{public static final int xingshu=0x7f040000;}
             mp = MediaPlayer.create(BgmService.this, R.raw.bgm);
             // 在MediaPlayer取得播放资源与stop()之后要准备PlayBack的状态前一定要使用MediaPlayer.prepeare()
-            mp.prepare();
             mp.start();
         } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

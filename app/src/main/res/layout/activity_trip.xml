@@ -16,7 +16,8 @@
 
         android:layout_x="293dp"
         android:layout_y="2dp"
-        android:background="@drawable/btn_album" />
+        android:background="@drawable/btn_album"
+        />
 
     <ImageButton
         android:id="@+id/btn_return"

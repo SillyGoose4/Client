@@ -1,6 +1,5 @@
 package com.SillyGoose.Activity;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -11,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> 9cb625e096dbb6c7d866bcfedb337fa80d457fe2
 
 
 public class AlbumActivity extends AppCompatActivity {
@@ -32,17 +28,12 @@ public class AlbumActivity extends AppCompatActivity {
         //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_album);
 
-
-
-
-
         btn_return=(ImageButton)findViewById(R.id.btn_return);
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent it = new Intent(AlbumActivity.this, MainActivity.class);
-                startActivity(it);
+                finish();
             }
         });
         mp=MediaPlayer.create(this, R.raw.btn);

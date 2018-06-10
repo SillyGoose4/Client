@@ -1,4 +1,5 @@
 package com.SillyGoose.Activity;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -224,17 +227,13 @@ public class TripActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         //返回按钮
         btn_return = (ImageButton) findViewById(R.id.btn_return);
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent it = new Intent(TripActivity.this, MainActivity.class);
-                startActivity(it);
+                finish();
             }
         });
         //相册按钮
@@ -247,14 +246,11 @@ public class TripActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
-
-
     }
-
     private void chenshowDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(TripActivity.this);
-        builder.setTitle("选择高铁类型");
-        builder.setSingleChoiceItems(new String[]{"有钱zuo", "有一点钱zuo", "有钱zuo"}, 0, new DialogInterface.OnClickListener() {
+        builder.setTitle("选择类型");
+        builder.setSingleChoiceItems(new String[]{"有钱zuo", "有一点钱zuo", "没钱zuo"}, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             }
         });
@@ -297,12 +293,36 @@ public class TripActivity extends AppCompatActivity {
                 mp.start();
                 Toast.makeText(TripActivity.this, "小鹅踏上旅程啦", Toast.LENGTH_SHORT).show();
                 dialogInterface.dismiss();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        /* for test
+                        try {
+                            Bitmap bitmap = OkHttpUnits.getPic();
+                            Message message = handler.obtainMessage();
+                            message.obj = bitmap;
+                            message.sendToTarget();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        */
+                    }
+                }).start();
+
             }
         });
         //使用模态，也就是，不对上面的三个按钮操作就不能继续其它操作。（本来：默认是可以其它操作的！！！）
         builder.show();
 
     }
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            //test.setImageBitmap((Bitmap) message.obj);
+            return false;
+        }
+    });
 
 
     @Override
