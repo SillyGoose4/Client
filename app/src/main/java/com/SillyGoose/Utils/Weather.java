@@ -50,9 +50,15 @@ public class Weather {
                         .addTextPara("needAlarm", "0")
                         .post();
                 try {
+<<<<<<< HEAD
                     setData(new JSONObject(res));
                     Log.d("weather:",res);
                     System.out.println(res);
+=======
+                   JSONObject weatherData=new JSONObject(res);
+                   //在此解析weatherData
+
+>>>>>>> 7694ec881c0836bb3a622d532dff56e587fa7faf
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
