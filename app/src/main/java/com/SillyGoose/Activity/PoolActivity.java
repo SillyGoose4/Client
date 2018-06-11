@@ -3,11 +3,23 @@ package com.SillyGoose.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-public class PoolActivity extends AppCompatActivity {
+import com.SillyGoose.Model.Status;
+import com.SillyGoose.Utils.MessageBox;
+import com.SillyGoose.Utils.OkHttpUnits;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+public class PoolActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageButton btn_return;
     private ImageButton btn_trip;
     private ImageButton btn_album;
@@ -58,41 +70,68 @@ public class PoolActivity extends AppCompatActivity {
                 startActivity(album);
             }
         });
-        btn_cloud.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        btn_moon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        btn_sun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        btn_rain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        btn_devil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        btn_wind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+        btn_cloud.setOnClickListener(this);
+        btn_moon.setOnClickListener(this);
+        btn_sun.setOnClickListener(this);
+        btn_rain.setOnClickListener(this);
+        btn_devil.setOnClickListener(this);
+        btn_wind.setOnClickListener(this);
     }
+    /* For Net thread and UI thread transinformation */
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            if((boolean)message.obj){
+                Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
+            }else{
+
+            }
+            return false;
+        }
+    });
+    /* Net Thread */
+    Runnable net = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = handler.obtainMessage();
+            JSONObject send = new JSONObject();
+            try {
+                send.putOpt("GOOSE", Status.getStatus());
+                if(OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/update"), send) == MessageBox.UG_SUCCESS){
+                     msg.obj = true;
+                }else{
+                    msg.obj = false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         super.moveTaskToBack(false);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_cloud:
+                break;
+            case R.id.btn_devil:
+                break;
+            case R.id.btn_moon:
+                break;
+            case R.id.btn_wind:
+                break;
+            case R.id.btn_sun:
+                break;
+            case R.id.btn_rain:
+                break;
+        }
+        new Thread(net).start();
+    }
 }

@@ -2,6 +2,8 @@ package com.SillyGoose.Model;
 
 import com.SillyGoose.Utils.Weather;
 
+import java.util.List;
+
 /**
  * 描述当前状态类 单例模式
  * Created by wangj on 2018/5/29.
@@ -18,7 +20,7 @@ public class Status {
 
     private static Goose goose;
 
-    private static Album album;
+    private static List<Album> albumList;
 
     private static Weather weather;
 
@@ -48,10 +50,6 @@ public class Status {
         Status.isSignIn = isSignIn;
     }
 
-    public static Album getAlbum() {
-        return album;
-    }
-
     public static CollectTime getCollectTime() {
         return collectTime;
     }
@@ -68,6 +66,14 @@ public class Status {
         return weather;
     }
 
+    public static List<Album> getAlbumList() {
+        return albumList;
+    }
+
+    public static void setAlbumList(List<Album> albumList) {
+        Status.albumList = albumList;
+    }
+
     public static double getLatitude() {
         return latitude;
     }
@@ -76,20 +82,12 @@ public class Status {
         return longitude;
     }
 
-    public static void setAlbum(Album album) {
-        Status.album = album;
-    }
-
     public static void setCollectTime(CollectTime collectTime) {
         Status.collectTime = collectTime;
     }
 
     public static void setGoose(Goose goose) {
         Status.goose = goose;
-    }
-
-    public static void setStatus(Status status) {
-        Status.status = status;
     }
 
     public static void setUser(User user) {

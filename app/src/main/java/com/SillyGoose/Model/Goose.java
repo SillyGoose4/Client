@@ -1,5 +1,8 @@
 package com.SillyGoose.Model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Goose {
     public Goose(){
 
@@ -26,6 +29,17 @@ public class Goose {
 
     public Goose(int userId){
         this.userId = userId;
+    }
+
+    public Goose(JSONObject msg) throws JSONException {
+        this.gooseCloud=msg.getInt("gooseCloud");
+        this.userId=msg.getInt("userId");
+        this.gooseRain=msg.getInt("gooseRain");
+        this.gooseSun=msg.getInt("gooseSun");
+        this.gooseWind=msg.getInt("gooseWind");
+        this.gooseDevil=msg.getInt("gooseDevil");
+        this.gooseEny=msg.getInt("gooseEny");
+        this.gooseStar=msg.getInt("gooseStar");
     }
 
     public void InitGoose(){

@@ -1,5 +1,7 @@
 package com.SillyGoose.Model;
 
+import java.util.Date;
+
 public class User {
 
     public User(int userId,
@@ -38,6 +40,7 @@ public class User {
 
     private String userPhone;
 
+    private Date lastSignIn;
 
     public Integer getUserId() {
         return userId;
@@ -71,4 +74,11 @@ public class User {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
+    public Date getLastSignIn() {
+        return lastSignIn;
+    }
+
+    public void setLastSignIn(Date lastSignIn) {
+        this.lastSignIn = lastSignIn;
+    }
 }

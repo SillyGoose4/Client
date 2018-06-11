@@ -13,11 +13,15 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Model.CollectTime;
+import com.SillyGoose.Model.Goose;
 import com.SillyGoose.Model.Status;
+import com.SillyGoose.Model.User;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
 import com.baidu.location.LocationClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -124,9 +128,18 @@ public class SignInActivity extends AppCompatActivity {
                     result = OkHttpUnits.postForGetJSON(OkHttpUnits.setAndGetUrl("/post"),data);
                     messageBox =MessageBox.valueOf(result.getString("Result"));
                     if(messageBox == MessageBox.SI_SUCCESS){
-                        // 由于User没用，所以就暂不考虑
-                        // Status.setUser(new User(result.getJSONObject("User").getString("")));
-                        //Status.setCollectTime();
+                        User recive=new User();
+                        recive.setUserId(result.getJSONObject("Message").getJSONObject("User").getInt("userId"));
+                        recive.setUserName(result.getJSONObject("Message").getJSONObject("User").getString("userName"));
+                        recive.setUserPhone(result.getJSONObject("Message").getJSONObject("User").getString("userPhone"));
+                        recive.setUserPasswd(result.getJSONObject("Message").getJSONObject("User").getString("userPasswd"));
+                        Goose goose = new Goose(result.getJSONObject("Message").getJSONObject("Goose"));
+                        CollectTime collectTime = new CollectTime(result.getJSONObject("Message").getJSONObject("CollectTime"));
+                        JSONArray alb = result.getJSONObject("Message").getJSONArray("Album");
+                        //List<Album> albums = alb
+                        Status.setGoose(goose);
+                        Status.setCollectTime(collectTime);
+                        Status.setUser(recive);
                     }
                     Message msg = handler.obtainMessage();
                     msg.what = 1;

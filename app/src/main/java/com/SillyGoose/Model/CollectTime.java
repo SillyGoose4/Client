@@ -1,5 +1,10 @@
 package com.SillyGoose.Model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CollectTime {
@@ -10,6 +15,24 @@ public class CollectTime {
 
     public CollectTime(int userId){
         this.userId = userId;
+    }
+
+    public CollectTime(JSONObject msg)  {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date;
+        try {
+            this.devilLasttime = sdf.parse(msg.getString("devilLasttime"));
+            this.rainLasttime = sdf.parse(msg.getString("rainLasttime"));
+            this.cloudLasttime = sdf.parse(msg.getString("cloudLastTime"));
+            this.starLasttime = sdf.parse(msg.getString("starLasttime"));
+            this.windLasttime = sdf.parse(msg.getString("windLasttime"));
+            this.sunLasttime = sdf.parse(msg.getString("sunLasttime"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void InitTime(Date currentDate){
