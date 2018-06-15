@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.SillyGoose.Model.CollectTime;
-import com.SillyGoose.Model.Goose;
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Model.User;
 import com.SillyGoose.Utils.MessageBox;
@@ -43,16 +41,13 @@ public class SignInActivity extends AppCompatActivity {
     private Thread thread;
     private LocationClient location = null;
 
-
+    long mExitTime;
     private final String TAG = "SignInActivity Called:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-
-
         /* initizalize */
         text_Passwd=(TextView)findViewById(R.id.SI_edit_Passwd);
         text_Phone=(TextView)findViewById(R.id.SI_edit_Phone);
@@ -77,34 +72,30 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+        // Return to MainActivity after finish
+
+
     }
 
-    /**
-     * 禁用返回键
-     * 按下返回键时调用
-     */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        super.moveTaskToBack(false);
+        /* there is Something Wrong in this Method */
+        long now = System.currentTimeMillis();
 
-    }
-
-    /**
-     * 禁用返回键
-     * 设置
-     * @param keyCode
-     * @param event
-     * @return
-     */
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if(KeyEvent.KEYCODE_BACK == keyCode){
-            return true;
+        if((now - mExitTime) > 2000) {
+            Toast.makeText(getApplicationContext(),"再按返回键退出！",Toast.LENGTH_LONG).show();
+            mExitTime = now;   //这里赋值最关键，别忘记
         }
-        return false;
+        else{
+            stopService(new Intent(getApplicationContext(),BgmService.class));
+            SignInActivity.this.finish();   //关闭本活动页面
+            MainActivity.Instance.finish();
+            Status.setIsSignIn(false);
+            //System.exit(0);
+        }
     }
+
 
     /**
      * 登录请求处理
@@ -115,8 +106,7 @@ public class SignInActivity extends AppCompatActivity {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "run: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                System.out.println("======================================================================");
+                Log.d(TAG, "run On SignIn: ======================================================================");
                 MessageBox messageBox;
                 JSONObject data = new JSONObject();
                 JSONObject result ;
@@ -133,12 +123,13 @@ public class SignInActivity extends AppCompatActivity {
                         recive.setUserName(result.getJSONObject("Message").getJSONObject("User").getString("userName"));
                         recive.setUserPhone(result.getJSONObject("Message").getJSONObject("User").getString("userPhone"));
                         recive.setUserPasswd(result.getJSONObject("Message").getJSONObject("User").getString("userPasswd"));
-                        Goose goose = new Goose(result.getJSONObject("Message").getJSONObject("Goose"));
+                        recive.setLastSignIn(result.getJSONObject("Message").getJSONObject("User").getString("lastSignIn"));
+                        //Goose goose = new Goose(result.getJSONObject("Message").getJSONObject("Goose"));
                         CollectTime collectTime = new CollectTime(result.getJSONObject("Message").getJSONObject("CollectTime"));
                         JSONArray alb = result.getJSONObject("Message").getJSONArray("Album");
                         //List<Album> albums = alb
-                        Status.setGoose(goose);
                         Status.setCollectTime(collectTime);
+                        Status.setGoose();
                         Status.setUser(recive);
                     }
                     Message msg = handler.obtainMessage();
@@ -168,8 +159,11 @@ public class SignInActivity extends AppCompatActivity {
             if(msg.obj == MessageBox.SI_SUCCESS){
                 Toast.makeText(getApplicationContext(), "登录成功",
                         Toast.LENGTH_LONG).show();
-                SignInActivity.this.finish();
                 Status.setIsSignIn(true);
+                Intent intent = new Intent();
+                intent.putExtra("Value","OK");
+                setResult(2,intent);
+                SignInActivity.this.finish();
             }else if(msg.obj == MessageBox.SI_NOTFIND){
                 Toast.makeText(getApplicationContext(), "未找到用户",
                         Toast.LENGTH_LONG).show();
@@ -178,6 +172,9 @@ public class SignInActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }else if(msg.obj == MessageBox.SI_ALREADYSIGNIN){
                 Toast.makeText(getApplicationContext(), "该用户已登录",
+                        Toast.LENGTH_LONG).show();
+            }else if(msg.obj == MessageBox.SYS_ERROR){
+                Toast.makeText(getApplicationContext(), "系统错误",
                         Toast.LENGTH_LONG).show();
             }
             return false;
@@ -189,8 +186,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onDestroy();
         //thread.stop();
         Log.d(TAG, "onDestroy: this activity will destroy");
-
-
     }
 }
 

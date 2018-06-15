@@ -110,7 +110,3 @@ public class AlbumActivity extends AppCompatActivity {
 
     }
 }
-
-
-
-

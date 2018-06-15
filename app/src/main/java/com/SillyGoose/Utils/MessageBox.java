@@ -19,6 +19,8 @@ public enum MessageBox {
     SU_FAIL("SignUp Fail"),
     SU_NOTMATCH("SignUp NotMatch"),
     SU_EXISTS("SignUp User Already Exists"),
+
+    SO_SUCCESS("SignOut Success"),
     /* -*- System Error -*- */
     SYS_NETERR("System NetErr"),
     SYS_MAINTAIN("System Maintain"),

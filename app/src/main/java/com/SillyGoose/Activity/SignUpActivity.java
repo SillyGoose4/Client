@@ -103,8 +103,8 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        super.moveTaskToBack(true);
-
+        super.moveTaskToBack(false);
+        this.finish();
     }
 
     /**
@@ -299,5 +299,6 @@ public class SignUpActivity extends AppCompatActivity {
             return false;
         }
     });
+
 }
 

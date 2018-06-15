@@ -30,6 +30,9 @@ public class TripActivity extends AppCompatActivity {
     private ImageView btn_southwest;
     private ImageView btn_northwest;
     private ImageView btn_northeast;
+    //  价位表
+    private static int[][] PRICE = {{1,1,1},{1,1,1},{1,1,1}};
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -329,6 +332,6 @@ public class TripActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         super.moveTaskToBack(false);
-
+        this.finish();
     }
 }

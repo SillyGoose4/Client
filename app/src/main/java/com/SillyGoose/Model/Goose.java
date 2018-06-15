@@ -1,9 +1,16 @@
 package com.SillyGoose.Model;
 
+import com.SillyGoose.Utils.Weather;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public class Goose {
+
     public Goose(){
 
     }
@@ -140,5 +147,83 @@ public class Goose {
 
     public void setGooseDevil(Integer gooseDevil) {
         this.gooseDevil = gooseDevil;
+    }
+
+    /**
+     * 计算时间差
+     * @param fisttime 第一次时间
+     * @return 两次是时间差值（分钟）
+     */
+    private long getΔt(Date fisttime,Date lasttime){
+        // 智商压制
+        // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // int deltaMin = 0;
+        // String current = simpleDateFormat.format(lasttime);
+        // String fistTime = simpleDateFormat.format(fisttime);
+        // int Δyear = Integer.valueOf(current.substring(0,3)) - Integer.valueOf(fistTime.substring(0,3));
+        // int Δmouth = Integer.valueOf(current.substring(5,6)) - Integer.valueOf(fistTime.substring(5,6));
+        // int Δday = Integer.valueOf(current.substring(8,9)) - Integer.valueOf(fistTime.substring(8,9));
+        // int Δhour = Integer.valueOf(current.substring(11,12)) - Integer.valueOf(fistTime.substring(11,12));
+        // int Δmin = Integer.valueOf(current.substring(13,14)) - Integer.valueOf(fistTime.substring(13,14));
+        long nd = 1000 * 24 * 60 * 60;
+        long nh = 1000 * 60 * 60;
+        long nm = 1000 * 60;
+
+        long diff = lasttime.getTime() - fisttime.getTime();
+        long day = diff / nd;
+        long hour = diff / nh;
+        long min = diff / nm;
+
+        return min;
+    }
+
+
+    /**
+     * 初始化
+     * 获取上次收集和这次收集的时间间隔，再通过获取间隔时间的天气获取收集数
+     */
+    public void initialize(){
+        //this.initialize();
+        Date current = new Date(System.currentTimeMillis());
+        Calendar month = Calendar.getInstance();
+        int MONTH = month.get(Calendar.MONTH) + 1;
+        int YEAR = month.get(Calendar.YEAR);
+        int DAY = month.get(Calendar.DAY_OF_MONTH);
+        int HOUR = month.get(Calendar.HOUR_OF_DAY);
+        long rain = getΔt(Status.getCollectTime().getRainLasttime(), current);
+        long star = getΔt(Status.getCollectTime().getStarLasttime(), current);
+        long sun  = getΔt(Status.getCollectTime().getSunLasttime(),  current);
+        long wind = getΔt(Status.getCollectTime().getWindLasttime(), current);
+        long devil= getΔt(Status.getCollectTime().getDevilLasttime(),current);
+        long cloud= getΔt(Status.getCollectTime().getCloudLasttime(),current);
+        long max = rain;
+        if(star > max) max = star;
+        if(sun  > max) max = sun;
+        if(wind > max) max = wind;
+        if(devil> max) max = devil;
+        if(cloud> max) max = cloud;
+        System.out.println("Δt:\tStar\t: " + star+"\n" +
+                              "\tSun\t: " + sun +"\n" +
+                              "\tWind\t: " + wind + "\n" +
+                              "\tDevil\t: "+ devil +"\n" +
+                              "\tCloud\t: "+cloud+"\n" +
+                              "\tRain\t: "+rain);
+        if((max/1440) >= 1) {
+            String m = "" + YEAR + MONTH;
+            System.out.println("Month is " + m);
+            List<String> ls= Weather.getHistoryWeather(m,DAY);
+            for (String s : ls){
+                switch (s) {
+                    case "Cloud":
+                        break;
+                    case "Wind":
+                        break;
+                    case "Sun":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }

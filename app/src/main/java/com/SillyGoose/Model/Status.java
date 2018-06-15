@@ -1,11 +1,10 @@
 package com.SillyGoose.Model;
 
-import com.SillyGoose.Utils.Weather;
-
 import java.util.List;
 
 /**
  * 描述当前状态类 单例模式
+ * 注意线程同步
  * Created by wangj on 2018/5/29.
  */
 
@@ -18,11 +17,9 @@ public class Status {
 
     private static CollectTime collectTime;
 
-    private static Goose goose;
+    private static Goose goose ;
 
     private static List<Album> albumList;
-
-    private static Weather weather;
 
     private static double latitude;//纬度
 
@@ -62,10 +59,6 @@ public class Status {
         return user;
     }
 
-    public static Weather getWeather() {
-        return weather;
-    }
-
     public static List<Album> getAlbumList() {
         return albumList;
     }
@@ -86,10 +79,6 @@ public class Status {
         Status.collectTime = collectTime;
     }
 
-    public static void setGoose(Goose goose) {
-        Status.goose = goose;
-    }
-
     public static void setUser(User user) {
         Status.user = user;
     }
@@ -101,4 +90,14 @@ public class Status {
     public static void setLongitude(double longitude) {
         Status.longitude = longitude;
     }
+
+    /**
+     * 设置上次收集与当前之间的已收集的物品
+     */
+    public static void setGoose() {
+        goose = new Goose();
+        //goose.getΔt(Status.getUser().getLastSignIn());
+        goose.initialize();
+    }
+
 }

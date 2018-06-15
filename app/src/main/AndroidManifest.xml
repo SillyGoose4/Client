@@ -51,6 +51,10 @@
             android:name=".BgmService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".TimerService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -65,6 +69,7 @@
         <activity android:name=".TripActivity" />
         <activity android:name=".AlbumActivity" />
         <activity android:name=".activity_btnclick" />
+
 
     </application>
 

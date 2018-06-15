@@ -23,7 +23,7 @@ public class CollectTime {
         try {
             this.devilLasttime = sdf.parse(msg.getString("devilLasttime"));
             this.rainLasttime = sdf.parse(msg.getString("rainLasttime"));
-            this.cloudLasttime = sdf.parse(msg.getString("cloudLastTime"));
+            this.cloudLasttime = sdf.parse(msg.getString("cloudLasttime"));
             this.starLasttime = sdf.parse(msg.getString("starLasttime"));
             this.windLasttime = sdf.parse(msg.getString("windLasttime"));
             this.sunLasttime = sdf.parse(msg.getString("sunLasttime"));
@@ -112,5 +112,27 @@ public class CollectTime {
 
     public void setStarLasttime(Date starLasttime) {
         this.starLasttime = starLasttime;
+    }
+
+    public JSONObject toJson(){
+        JSONObject res = new JSONObject();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            res.put("userId",this.getUserId().toString());
+            res.put("cloudLasttime",simpleDateFormat.parse(this.getCloudLasttime().toString()));
+            res.put("devilLasttime",simpleDateFormat.parse(this.getDevilLasttime().toString()));
+            res.put("rainLasttime",simpleDateFormat.parse(this.getRainLasttime().toString()));
+            res.put("starLasttime",simpleDateFormat.parse(this.getStarLasttime().toString()));
+            res.put("sunLasttime",simpleDateFormat.parse(this.getSunLasttime().toString()));
+            res.put("windLasttime",simpleDateFormat.parse(this.getWindLasttime().toString()));
+            System.out.println(res.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 }

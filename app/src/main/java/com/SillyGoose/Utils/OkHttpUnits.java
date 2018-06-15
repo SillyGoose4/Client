@@ -41,7 +41,7 @@ public class OkHttpUnits {
      */
     private static OkHttpUnits httpUnits=null;
     private static MediaType JSON=MediaType.parse("application/json");
-    private static String url="http://172.25.32.244:8080";
+    private static String url="http://39.108.107.28:8080";
 
     private OkHttpUnits(){
     }
