@@ -43,193 +43,31 @@ public class TripActivity extends AppCompatActivity {
         /*  添加地图触摸事件    东北*/
         btn_northeast = (ImageView) findViewById(R.id.btn_northeast);
         bitmap = ((BitmapDrawable) (((ImageView) btn_northeast).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_northeast.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_northeast.setOnTouchListener(touchListener);
         /*  添加地图触摸事件    华中*/
         btn_centralchina = (ImageView) findViewById(R.id.btn_centralchina);
         bitmap = ((BitmapDrawable) (((ImageView) btn_centralchina).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_centralchina.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_centralchina.setOnTouchListener(touchListener);
           /*  添加地图触摸事件    华北*/
         btn_northchina = (ImageView) findViewById(R.id.btn_northchina);
         bitmap = ((BitmapDrawable) (((ImageView) btn_northchina).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_northchina.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_northchina.setOnTouchListener(touchListener);
           /*  添加地图触摸事件    华东*/
         btn_eastchina = (ImageView) findViewById(R.id.btn_eastchina);
         bitmap = ((BitmapDrawable) (((ImageView) btn_eastchina).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_eastchina.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_eastchina.setOnTouchListener(touchListener);
           /*  添加地图触摸事件    华南*/
         btn_southchina = (ImageView) findViewById(R.id.btn_southchina);
         bitmap = ((BitmapDrawable) (((ImageView) btn_southchina).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_southchina.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_southchina.setOnTouchListener(touchListener);
           /*  添加地图触摸事件    西南*/
         btn_southwest = (ImageView) findViewById(R.id.btn_southwest);
         bitmap = ((BitmapDrawable) (((ImageView) btn_southwest).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_southwest.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
+        btn_southwest.setOnTouchListener(touchListener);
           /*  添加地图触摸事件    西北*/
         btn_northwest = (ImageView) findViewById(R.id. btn_northwest);
         bitmap = ((BitmapDrawable) (((ImageView)  btn_northwest).getBackground())).getBitmap();//得到ImageButton的图片
-        btn_northwest.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Log.d("OnSingleTapUp", "Success");
-                        if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
-                            //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        } else {
-                            //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                            chenshowDialog();
-                            Log.d("trip", "onTouch:123 ");
-                        }
-                        break;
-                }
-                Log.d("OnTouch", "Success");
-                return false;
-
-            }
-        });
-
+        btn_northwest.setOnTouchListener(touchListener);
         //返回按钮
         btn_return = (ImageButton) findViewById(R.id.btn_return);
         btn_return.setOnClickListener(new View.OnClickListener() {
@@ -250,11 +88,39 @@ public class TripActivity extends AppCompatActivity {
             }
         });
     }
+    View.OnTouchListener touchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            int eventaction = event.getAction();
+            switch (eventaction) {
+                case MotionEvent.ACTION_DOWN:
+
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_UP:
+                    Log.d("OnSingleTapUp", "Success");
+                    if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
+                        //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
+                    } else {
+                        //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
+                        chenshowDialog();
+                        Log.d("trip", "onTouch:123 ");
+                    }
+                    break;
+            }
+            Log.d("OnTouch", "Success");
+
+            return false;
+        }
+    };
+
     private void chenshowDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(TripActivity.this);
         builder.setTitle("选择类型");
         builder.setSingleChoiceItems(new String[]{"有钱zuo", "有一点钱zuo", "没钱zuo"}, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
             }
         });
         //2 添加确定按钮
@@ -299,16 +165,7 @@ public class TripActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        /* for test
-                        try {
-                            Bitmap bitmap = OkHttpUnits.getPic();
-                            Message message = handler.obtainMessage();
-                            message.obj = bitmap;
-                            message.sendToTarget();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        */
+
                     }
                 }).start();
 

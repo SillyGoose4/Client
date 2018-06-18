@@ -3,11 +3,36 @@
     <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud1" />
 
     <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud2" />
 
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
+    <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud3" />
     <item android:duration="100" android:drawable="@drawable/bg_cloud3" />

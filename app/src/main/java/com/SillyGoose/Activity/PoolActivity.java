@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
+import com.SillyGoose.Utils.Weather;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +54,7 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool);
         INSTANCE = this;
+        dynamicBackground();
         mp=MediaPlayer.create(this,R.raw.btn);
         btn_return = (ImageButton) findViewById(R.id.btn_return);
         btn_rain=(ImageButton) findViewById(R.id.btn_rain);
@@ -94,6 +97,52 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
         btn_devil.setOnClickListener(this);
         btn_wind.setOnClickListener(this);
 
+    }
+
+    /**
+     * 动态设置背景
+     */
+    private void dynamicBackground(){
+        View viewanim=findViewById(R.id.pool);
+        switch (Weather.WEATHER) {
+            case "Cloud":
+                if (Weather.ISDAY) {
+                    viewanim.setBackgroundResource(R.drawable.dcloud);
+                } else {
+                    viewanim.setBackgroundResource(R.drawable.ncloud);
+                }
+                break;
+            case "Rain":
+                if (Weather.ISDAY) {
+                    viewanim.setBackgroundResource(R.drawable.drain);
+                } else {
+                    viewanim.setBackgroundResource(R.drawable.nrain);
+                }
+                break;
+            case "Sun":
+                if(Weather.ISWIND) {
+                    viewanim.setBackgroundResource(R.drawable.dwind);
+                }else {
+                    viewanim.setBackgroundResource(R.drawable.bg_day);
+                    return;
+                }
+                break;
+            case "Star":
+                if(Weather.ISWIND) {
+                    viewanim.setBackgroundResource(R.drawable.nwind);
+                }else {
+                    viewanim.setBackgroundResource(R.drawable.bg_night);
+                    return;
+                }
+                break;
+            case "Devil":
+                break;
+            default:
+                viewanim.setBackgroundResource(R.drawable.bg_day);
+                break;
+        }
+        AnimationDrawable drawable = (AnimationDrawable) viewanim.getBackground();
+        drawable.start();
     }
 
     /**
@@ -171,7 +220,8 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
     public void setDialog(View view,String suf,int res, String clickBtn){
         Log.d("setDialog", "setDialog: Success");
         if(res == 0){
-            Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_LONG).show();
+            String msg = "你还没有收集到哦 ~ 再等等吧！";
+            showButtonDialogFragment(view,msg,"0");
         }else{
             String msg = "你确定收集 "+res+" "+suf+"ma?";
             showButtonDialogFragment(view,msg,clickBtn);
@@ -191,8 +241,12 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(PoolActivity.this, "点击了确定 " + which, Toast.LENGTH_SHORT).show();
                 //new Thread(net).start();
-                String[] params = {clickBtn};
-                new Post().execute(params);
+                if(clickBtn.equals("0")){
+
+                }else {
+                    String[] params = {clickBtn};
+                    new Post().execute(params);
+                }
             }
         }, new DialogInterface.OnClickListener() {
             @Override

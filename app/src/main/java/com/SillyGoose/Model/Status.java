@@ -25,6 +25,8 @@ public class Status {
 
     private static double longitude;//经度
 
+    private static boolean isTrip = false;
+
     public static Status getStatus() {
         if(status == null){
             synchronized (Status.class){
@@ -89,6 +91,14 @@ public class Status {
 
     public static void setLongitude(double longitude) {
         Status.longitude = longitude;
+    }
+
+    public static boolean isIsTrip() {
+        return isTrip;
+    }
+
+    public static void setIsTrip(boolean isTrip) {
+        Status.isTrip = isTrip;
     }
 
     /**

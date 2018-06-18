@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.LocationInfo;
 import com.SillyGoose.Utils.OkHttpUnits;
-import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
 
 import org.json.JSONException;
@@ -130,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }).start();
+            Status.setIsSignIn(false);
             stopService(new Intent(getApplicationContext(),BgmService.class));
             stopService(new Intent(getApplicationContext(),TimerService.class));
             MainActivity.this.finish();   //关闭本活动页面
@@ -144,12 +144,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         //有可能造成线程不同步，需解决
-        Weather.getWeather();
+        //Weather.getWeather();
 
         Intent service = new Intent(getApplicationContext(),TimerService.class);
         startService(service);
         //Status.setGoose();
     }
+
 
 }
 

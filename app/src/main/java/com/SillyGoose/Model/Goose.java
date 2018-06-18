@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class Goose {
 
@@ -59,93 +58,93 @@ public class Goose {
         this.gooseWind = 0;
         this.gooseSun = 0;
     }
-    private Integer userId;
+    private int userId;
 
-    private Integer gooseEny;
+    private int gooseEny;
 
-    private Integer gooseMap;
+    private int gooseMap;
 
-    private Integer gooseSun;
+    private int gooseSun;
 
-    private Integer gooseCloud;
+    private int gooseCloud;
 
-    private Integer gooseStar;
+    private int gooseStar;
 
-    private Integer gooseWind;
+    private int gooseWind;
 
-    private Integer gooseRain;
+    private int gooseRain;
 
-    private Integer gooseDevil;
+    private int gooseDevil;
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public Integer getGooseEny() {
+    public int getGooseEny() {
         return gooseEny;
     }
 
-    public void setGooseEny(Integer gooseEny) {
+    public void setGooseEny(int gooseEny) {
         this.gooseEny = gooseEny;
     }
 
-    public Integer getGooseMap() {
+    public int getGooseMap() {
         return gooseMap;
     }
 
-    public void setGooseMap(Integer gooseMap) {
+    public void setGooseMap(int gooseMap) {
         this.gooseMap = gooseMap;
     }
 
-    public Integer getGooseSun() {
+    public int getGooseSun() {
         return gooseSun;
     }
 
-    public void setGooseSun(Integer gooseSun) {
+    public void setGooseSun(int gooseSun) {
         this.gooseSun = gooseSun;
     }
 
-    public Integer getGooseCloud() {
+    public int getGooseCloud() {
         return gooseCloud;
     }
 
-    public void setGooseCloud(Integer gooseCloud) {
+    public void setGooseCloud(int gooseCloud) {
         this.gooseCloud = gooseCloud;
     }
 
-    public Integer getGooseStar() {
+    public int getGooseStar() {
         return gooseStar;
     }
 
-    public void setGooseStar(Integer gooseStar) {
+    public void setGooseStar(int gooseStar) {
         this.gooseStar = gooseStar;
     }
 
-    public Integer getGooseWind() {
+    public int getGooseWind() {
         return gooseWind;
     }
 
-    public void setGooseWind(Integer gooseWind) {
+    public void setGooseWind(int gooseWind) {
         this.gooseWind = gooseWind;
     }
 
-    public Integer getGooseRain() {
+    public int getGooseRain() {
         return gooseRain;
     }
 
-    public void setGooseRain(Integer gooseRain) {
+    public void setGooseRain(int gooseRain) {
         this.gooseRain = gooseRain;
     }
 
-    public Integer getGooseDevil() {
+    public int getGooseDevil() {
         return gooseDevil;
     }
 
-    public void setGooseDevil(Integer gooseDevil) {
+    public void setGooseDevil(int gooseDevil) {
         this.gooseDevil = gooseDevil;
     }
 
@@ -160,11 +159,11 @@ public class Goose {
         // int deltaMin = 0;
         // String current = simpleDateFormat.format(lasttime);
         // String fistTime = simpleDateFormat.format(fisttime);
-        // int Δyear = Integer.valueOf(current.substring(0,3)) - Integer.valueOf(fistTime.substring(0,3));
-        // int Δmouth = Integer.valueOf(current.substring(5,6)) - Integer.valueOf(fistTime.substring(5,6));
-        // int Δday = Integer.valueOf(current.substring(8,9)) - Integer.valueOf(fistTime.substring(8,9));
-        // int Δhour = Integer.valueOf(current.substring(11,12)) - Integer.valueOf(fistTime.substring(11,12));
-        // int Δmin = Integer.valueOf(current.substring(13,14)) - Integer.valueOf(fistTime.substring(13,14));
+        // int Δyear = int.valueOf(current.substring(0,3)) - int.valueOf(fistTime.substring(0,3));
+        // int Δmouth = int.valueOf(current.substring(5,6)) - int.valueOf(fistTime.substring(5,6));
+        // int Δday = int.valueOf(current.substring(8,9)) - int.valueOf(fistTime.substring(8,9));
+        // int Δhour = int.valueOf(current.substring(11,12)) - int.valueOf(fistTime.substring(11,12));
+        // int Δmin = int.valueOf(current.substring(13,14)) - int.valueOf(fistTime.substring(13,14));
         long nd = 1000 * 24 * 60 * 60;
         long nh = 1000 * 60 * 60;
         long nm = 1000 * 60;
@@ -208,22 +207,14 @@ public class Goose {
                               "\tDevil\t: "+ devil +"\n" +
                               "\tCloud\t: "+cloud+"\n" +
                               "\tRain\t: "+rain);
-        if((max/1440) >= 1) {
-            String m = "" + YEAR + MONTH;
+        int dd = (int) (max / 1440);
+        int dh = (int) ((max % 1440) / 60);
+        int dm = (int) ((max % 1440) % 60);
+        String m = "" + YEAR + (MONTH > 10 ? MONTH : "0"+MONTH);
+        Weather.getHistoryWeather(m,dd,dh);
+        if((max / 60) >= HOUR) {
             System.out.println("Month is " + m);
-            List<String> ls= Weather.getHistoryWeather(m,DAY);
-            for (String s : ls){
-                switch (s) {
-                    case "Cloud":
-                        break;
-                    case "Wind":
-                        break;
-                    case "Sun":
-                        break;
-                    default:
-                        break;
-                }
-            }
+            System.out.println("相隔 " + dd + " 天 " + dh + " 小时 "+ dm + " 分钟");
         }
     }
 }
