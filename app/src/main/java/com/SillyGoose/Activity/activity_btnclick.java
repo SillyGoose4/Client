@@ -1,7 +1,6 @@
-package sillyGoose.com;
-import com.SillyGoose.Activity.R;
-import android.support.v7.app.AppCompatActivity;
+package com.SillyGoose.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class activity_btnclick extends AppCompatActivity {
 

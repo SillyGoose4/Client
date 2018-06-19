@@ -6,24 +6,28 @@ package com.SillyGoose.Utils;
  */
 
 public enum MessageBox {
-    /*  -*- SignIn  -*- */
+    /* -*- SignIn -*- */
     SI_SUCCESS("SignIn Success"),
     SI_FAIL("SignIn Fail"),
     SI_MISS("Sign Miss"),
     SI_NOTFIND("SignIn NotFind"),
     SI_PASSWORDWRONG("SignIn Password Wrong"),
     SI_ANOTHERPLACE("SignIn AnotherPlace"),
-    /*  -*- SignUp  -*-   */
+    SI_ALREADYSIGNIN("Already SignIn"),
+    /* -*- SignUp -* -*/
     SU_SUCCESS("SignUp Succcess"),
     SU_FAIL("SignUp Fail"),
     SU_NOTMATCH("SignUp NotMatch"),
-    /*   -*-   System Error  -*-  */
+    SU_EXISTS("SignUp User Already Exists"),
+
+    SO_SUCCESS("SignOut Success"),
+    /* -*- System Error -*- */
     SYS_NETERR("System NetErr"),
-    SYS_MAINTAIN("System Maintain");
-
-    /* -*-  Weather     -*-  */
-
-
+    SYS_MAINTAIN("System Maintain"),
+    SYS_ERROR("System error"),
+    UG_SUCCESS("Update Goose Success"),
+    UC_SUCCESS("Update CollectTime Success"),
+    ;
     MessageBox(String message){
 
     }

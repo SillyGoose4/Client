@@ -7,7 +7,7 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 
 /**
- *
+ * Maybe we didn't need it
  * Created by wangj on 2018/6/7.
  */
 

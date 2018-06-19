@@ -2,21 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pool"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_night"
+    android:background="@drawable/bg_day"
     tools:context="com.SillyGoose.Activity.PoolActivity">
-
 
     <ImageButton
         android:id="@+id/btn_airplane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/btn_trip"
-        android:stateListAnimator="@drawable/btn_trip"
-        />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/btn_trip" />
 
     <ImageButton
         android:id="@+id/btn_wind"
@@ -27,7 +25,6 @@
         android:layout_toEndOf="@+id/btn_rain"
         android:adjustViewBounds="true"
         android:background="@drawable/btn_wind"
-        android:stateListAnimator="@drawable/btn_wind"
         />
 
     <ImageButton
@@ -37,7 +34,6 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_moon"
         android:background="@drawable/btn_devil"
-        android:stateListAnimator="@drawable/btn_devil"
         />
 
     <ImageButton
@@ -47,7 +43,6 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_album"
         android:background="@drawable/btn_cloud"
-        android:stateListAnimator="@drawable/btn_cloud"
         />
 
     <ImageButton
@@ -57,7 +52,6 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/btn_cloud"
         android:background="@drawable/btn_moon"
-        android:stateListAnimator="@drawable/btn_moon"
         />
 
     <ImageButton
@@ -68,7 +62,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:background="@drawable/btn_rain"
-        android:stateListAnimator="@drawable/btn_rain"
         />
 
     <ImageButton
@@ -78,7 +71,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_sun"
-        android:stateListAnimator="@drawable/btn_sun"
         />
 
     <ImageButton
@@ -88,7 +80,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_album"
-        android:stateListAnimator="@drawable/btn_album"
         />
 
     <ImageButton
@@ -98,7 +89,21 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_return"
-        android:stateListAnimator="@drawable/btn_return"
         />
 
+    <ImageButton
+        android:id="@+id/btn_gooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_rain"
+        />
+
+    <TextView
+        android:id="@+id/gooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_gooseEny"
+        android:text="" />
 </RelativeLayout>

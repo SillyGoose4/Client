@@ -1,5 +1,7 @@
 package com.SillyGoose.Utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -9,6 +11,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -36,7 +41,7 @@ public class OkHttpUnits {
      */
     private static OkHttpUnits httpUnits=null;
     private static MediaType JSON=MediaType.parse("application/json");
-    private static String url="http://172.25.32.244:8080";
+    private static String url="http://39.108.107.28:8080";
 
     private OkHttpUnits(){
     }
@@ -227,5 +232,59 @@ public class OkHttpUnits {
         jsonObject = new JSONObject(msg);
         Log.d(TAG,"msg is" + msg);
         return jsonObject;
+    }
+
+    /**
+     * get bitmap from service
+     * @param userId get Pic User
+     * @param picLevel pic level
+     * @param picBelong pic belong
+     * @return
+     * @throws IOException
+     */
+    public static Bitmap getPic(String userId, String picLevel, String picBelong) throws IOException {
+        Bitmap bitmap;
+        OkHttpClient client = getClient();
+        LinkedHashMap<String,String> params = new LinkedHashMap<String,String>();
+        params.put("userId",userId);
+        params.put("picLevel",picLevel);
+        params.put("picBelong",picBelong);
+        String url = attachHttpGetParams(setAndGetUrl("/get/download"),params);
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        Response response = client.newCall(request).execute();
+        bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+        return bitmap;
+    }
+    /**
+     * 为HttpGet 的 url 方便的添加多个name value 参数。
+     * @param url
+     * @param params
+     * @return
+     */
+    public static String attachHttpGetParams(String url, LinkedHashMap<String,String> params){
+
+        Iterator<String> keys = params.keySet().iterator();
+        Iterator<String> values = params.values().iterator();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("?");
+
+        for (int i=0;i<params.size();i++ ) {
+            String value=null;
+            try {
+                value= URLEncoder.encode(values.next(),"utf-8");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            stringBuffer.append(keys.next()+"="+value);
+            if (i!=params.size()-1) {
+                stringBuffer.append("&");
+            }
+        }
+
+        return url + stringBuffer.toString();
     }
 }

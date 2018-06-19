@@ -1,5 +1,9 @@
 package com.SillyGoose.Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class User {
 
     public User(int userId,
@@ -38,6 +42,7 @@ public class User {
 
     private String userPhone;
 
+    private Date lastSignIn;
 
     public Integer getUserId() {
         return userId;
@@ -71,4 +76,17 @@ public class User {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
+    public Date getLastSignIn() {
+        return lastSignIn;
+    }
+
+    public void setLastSignIn(String lastSignIn) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            System.out.println(simpleDateFormat.parse(lastSignIn));
+            this.lastSignIn =simpleDateFormat.parse(lastSignIn);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }

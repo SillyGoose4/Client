@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="100" android:drawable="@drawable/bg_rain4" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain4" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain4" />
+
+    <item android:duration="100" android:drawable="@drawable/bg_rain5" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain5" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain5" />
+
+    <item android:duration="100" android:drawable="@drawable/bg_rain6" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain6" />
+    <item android:duration="100" android:drawable="@drawable/bg_rain6" />
+</animation-list>

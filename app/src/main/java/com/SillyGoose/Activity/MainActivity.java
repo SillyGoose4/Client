@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.LocationInfo;
 import com.SillyGoose.Utils.OkHttpUnits;
-import com.SillyGoose.Utils.Weather;
 import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btn_trip;
     private ImageButton btn_album;
 
-    private long mExitTime = System.currentTimeMillis();
+    private long mExitTime = 0;
 
     public Status appStatus;
     private Thread getWeather;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mp=new MediaPlayer();
     public LocationClient mLocationClient = null;
     private LocationInfo myListener = new LocationInfo();
+    //获取实例
+    public static MainActivity Instance;
 
     //static final int COLOR1 = Color.parseColor("#FFB032");
     @Override
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mp=MediaPlayer.create(this, R.raw.btn);
         setContentView(R.layout.activity_main);
-
+        Instance = this;
         btn_pond=(ImageButton)findViewById(R.id.btn_pond);
         btn_pond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                   Intent trip=new Intent(MainActivity.this,TripActivity.class);
                   startActivity(trip);
                 }
-            });
+        });
+
         btn_album=(ImageButton)findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,34 +74,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /*  loading current status   */
-        // get OkHttp instance
-        OkHttpUnits client=OkHttpUnits.getInstance();
-        startActivity(new Intent(MainActivity.this,SignInActivity.class));
-   
+
         // If not Sign In ~
         if(!Status.isIsSignIn()) {
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            //startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            startActivityForResult(new Intent(MainActivity.this, SignInActivity.class),1);
         }
-    }
-    private void toast(String content){
-        Toast.makeText(getApplicationContext(),content, Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        super.moveTaskToBack(false);
-        if(System.currentTimeMillis() - mExitTime < 800) {
-            MainActivity.this.finish();   //关闭本活动页面
-        }
-        else{
-            toast("再按返回键退出！");
-            mExitTime = System.currentTimeMillis();   //这里赋值最关键，别忘记
-        }
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        /*  init BaiduMap SDK   */
+
+        /*  Maybe I should delete it because I didn't used it */
+        /*  init BaiduMap SDK
         mLocationClient = new LocationClient(getApplicationContext());
         //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
@@ -112,10 +98,59 @@ public class MainActivity extends AppCompatActivity {
         mLocationClient.setLocOption(option);
         mLocationClient.requestLocation();
         mLocationClient.start();
-        //mLocationClient.stop();
-        Weather.getWeather();
-
+        //mLocationClient.stop(); */
 
     }
+
+    private void toast(String content){
+        Toast.makeText(getApplicationContext(),content, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        /* there is Something Wrong in this Method */
+        long now = System.currentTimeMillis();
+        if((now - mExitTime) > 2000) {
+            toast("再按返回键退出！");
+            mExitTime = now;   //这里赋值最关键，别忘记
+        }
+        else{
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("Value","SIGNOUT");
+                        jsonObject.put("Phone",Status.getUser().getUserPhone());
+                        OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/post"),jsonObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+            Status.setIsSignIn(false);
+            stopService(new Intent(getApplicationContext(),BgmService.class));
+            stopService(new Intent(getApplicationContext(),TimerService.class));
+            MainActivity.this.finish();   //关闭本活动页面
+            //System.exit(0);
+        }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        //有可能造成线程不同步，需解决
+        //Weather.getWeather();
+
+        Intent service = new Intent(getApplicationContext(),TimerService.class);
+        startService(service);
+        //Status.setGoose();
+    }
+
+
 }
 

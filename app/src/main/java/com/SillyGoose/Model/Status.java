@@ -1,9 +1,10 @@
 package com.SillyGoose.Model;
 
-import com.SillyGoose.Utils.Weather;
+import java.util.List;
 
 /**
  * 描述当前状态类 单例模式
+ * 注意线程同步
  * Created by wangj on 2018/5/29.
  */
 
@@ -16,15 +17,15 @@ public class Status {
 
     private static CollectTime collectTime;
 
-    private static Goose goose;
+    private static Goose goose ;
 
-    private static Album album;
-
-    private static Weather weather;
+    private static List<Album> albumList;
 
     private static double latitude;//纬度
 
     private static double longitude;//经度
+
+    private static boolean isTrip = false;
 
     public static Status getStatus() {
         if(status == null){
@@ -48,10 +49,6 @@ public class Status {
         Status.isSignIn = isSignIn;
     }
 
-    public static Album getAlbum() {
-        return album;
-    }
-
     public static CollectTime getCollectTime() {
         return collectTime;
     }
@@ -64,8 +61,12 @@ public class Status {
         return user;
     }
 
-    public static Weather getWeather() {
-        return weather;
+    public static List<Album> getAlbumList() {
+        return albumList;
+    }
+
+    public static void setAlbumList(List<Album> albumList) {
+        Status.albumList = albumList;
     }
 
     public static double getLatitude() {
@@ -76,20 +77,8 @@ public class Status {
         return longitude;
     }
 
-    public static void setAlbum(Album album) {
-        Status.album = album;
-    }
-
     public static void setCollectTime(CollectTime collectTime) {
         Status.collectTime = collectTime;
-    }
-
-    public static void setGoose(Goose goose) {
-        Status.goose = goose;
-    }
-
-    public static void setStatus(Status status) {
-        Status.status = status;
     }
 
     public static void setUser(User user) {
@@ -102,5 +91,28 @@ public class Status {
 
     public static void setLongitude(double longitude) {
         Status.longitude = longitude;
+    }
+
+    public static boolean isIsTrip() {
+        return isTrip;
+    }
+
+    public static void setIsTrip(boolean isTrip) {
+        Status.isTrip = isTrip;
+    }
+
+    /**
+     * 设置上次收集与当前之间的已收集的物品
+     */
+    public static void setGoose(int eny) {
+        goose = new Goose();
+        //goose.getΔt(Status.getUser().getLastSignIn());
+        goose.initialize();
+        goose.setGooseEny(eny);
+        goose.setGooseCloud(100);
+        goose.setGooseDevil(100);
+        goose.setGooseRain(100);
+        goose.setGooseStar(100);
+        goose.setGooseSun(100);
     }
 }

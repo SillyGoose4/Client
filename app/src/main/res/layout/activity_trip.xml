@@ -16,7 +16,8 @@
 
         android:layout_x="293dp"
         android:layout_y="2dp"
-        android:background="@drawable/btn_album" />
+        android:background="@drawable/btn_album"
+        />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -106,4 +107,22 @@
         android:clickable="true"
         android:visibility="visible" />
 
+    <ImageButton
+        android:id="@+id/btn_tgooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_rain"
+        android:layout_x="270dp"
+        android:layout_y="537dp" />
+
+    <TextView
+        android:id="@+id/tgooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_gooseEny"
+        android:layout_x="273dp"
+        android:layout_y="536dp"
+        android:text="" />
 </AbsoluteLayout>

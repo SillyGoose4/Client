@@ -2,19 +2,19 @@ apply plugin: 'com.android.application'
 
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'SillyGoose'
-            keyPassword 'SillyGoose4d'
-            storeFile file('C:/Users/wangj/Documents/Android Jks/SillyGoose.jks')
-            storePassword 'SillyGoose4d'
-        }
-    }
+    //signingConfigs {
+    //    config {
+    //        keyAlias 'SillyGoose'
+    //        keyPassword 'SillyGoose4d'
+    //        storeFile file('C:/Users/wangj/Documents/Android Jks/SillyGoose.jks')
+    //        storePassword 'SillyGoose4d'
+    //  }
+    //}
     compileSdkVersion 26
     //buildToolsVersion "26.0.3"
     defaultConfig {
         applicationId "sillyGoose.com"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -24,8 +24,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
+        //debug {
+        //    signingConfig signingConfigs.config
+        //}
     }
     sourceSets {
         main {

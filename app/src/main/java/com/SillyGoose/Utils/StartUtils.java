@@ -32,8 +32,12 @@ public class StartUtils extends Application {
 
         /*  initialize  Units class */
         Status status=Status.getStatus();
+        // get Activity instance
         ActivityUnits activityUnits=ActivityUnits.getInstance();
-
+        // get OkHttp instance
+        OkHttpUnits client=OkHttpUnits.getInstance();
+        // get weather instance
+        Weather weather = Weather.getCurrentWeather();
     }
 
 }
