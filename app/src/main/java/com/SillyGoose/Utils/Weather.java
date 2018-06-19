@@ -127,6 +127,8 @@ public class Weather {
                         }
                     }else if(now.getString("weather").contains("雨")){
                         WEATHER = "Rain";
+                    }else if(now.getString("weather").contains("阴")){
+                        WEATHER = "Cloud";
                     }else{
                         WEATHER = "Devil";
                     }

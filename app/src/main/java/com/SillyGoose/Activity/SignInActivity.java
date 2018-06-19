@@ -129,7 +129,7 @@ public class SignInActivity extends AppCompatActivity {
                         JSONArray alb = result.getJSONObject("Message").getJSONArray("Album");
                         //List<Album> albums = alb
                         Status.setCollectTime(collectTime);
-                        Status.setGoose();
+                        Status.setGoose(result.getJSONObject("Message").getJSONObject("Goose").getInt("gooseEny"));
                         Status.setUser(recive);
                     }
                     Message msg = handler.obtainMessage();

@@ -104,10 +104,15 @@ public class Status {
     /**
      * 设置上次收集与当前之间的已收集的物品
      */
-    public static void setGoose() {
+    public static void setGoose(int eny) {
         goose = new Goose();
         //goose.getΔt(Status.getUser().getLastSignIn());
         goose.initialize();
+        goose.setGooseEny(eny);
+        goose.setGooseCloud(100);
+        goose.setGooseDevil(100);
+        goose.setGooseRain(100);
+        goose.setGooseStar(100);
+        goose.setGooseSun(100);
     }
-
 }

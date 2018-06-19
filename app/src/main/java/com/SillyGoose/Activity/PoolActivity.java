@@ -15,8 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SillyGoose.Model.Goose;
 import com.SillyGoose.Model.Status;
 import com.SillyGoose.Utils.MessageBox;
 import com.SillyGoose.Utils.OkHttpUnits;
@@ -41,6 +43,8 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btn_wind;
     private ImageButton btn_devil;
     private ImageButton btn_moon;
+    private TextView gooseENY;
+
     MediaPlayer mp=new MediaPlayer();
 
     //本类的实例
@@ -65,6 +69,9 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
         btn_moon=(ImageButton) findViewById(R.id.btn_moon);
         btn_trip=(ImageButton)findViewById(R.id.btn_airplane);
         btn_album=(ImageButton)findViewById(R.id.btn_album);
+        //gooseEny
+        gooseENY=(TextView)findViewById(R.id.gooseEny);
+        gooseENY.setText(""+Status.getGoose().getGooseEny());
 
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,9 +121,9 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case "Rain":
                 if (Weather.ISDAY) {
-                    viewanim.setBackgroundResource(R.drawable.drain);
-                } else {
                     viewanim.setBackgroundResource(R.drawable.nrain);
+                } else {
+                    viewanim.setBackgroundResource(R.drawable.drain);
                 }
                 break;
             case "Sun":
@@ -136,6 +143,11 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case "Devil":
+                if(Weather.ISWIND) {
+                    viewanim.setBackgroundResource(R.drawable.bg_day);
+                }else{
+                    viewanim.setBackgroundResource(R.drawable.bg_night);
+                }
                 break;
             default:
                 viewanim.setBackgroundResource(R.drawable.bg_day);
@@ -166,23 +178,27 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
         String suf="";
         Date lastTime = null;
         int res = 0;
+        int gooseEny=0;
         switch (view.getId()){
             case R.id.btn_cloud:
                 clickBtn = "Cloud";
                 lastTime = Status.getCollectTime().getCloudLasttime();
                 res = Status.getGoose().getGooseCloud();
+                gooseEny=res*4;
                 suf = "朵云";
                 break;
             case R.id.btn_devil:
                 clickBtn = "Devil";
                 lastTime = Status.getCollectTime().getDevilLasttime();
                 res = Status.getGoose().getGooseDevil();
+                gooseEny=res*24;
                 suf = "个";
                 break;
             case R.id.btn_moon:
                 clickBtn = "Star";
                 lastTime = Status.getCollectTime().getStarLasttime();
                 res = Status.getGoose().getGooseStar();
+                gooseEny=res*3;
                 suf = "个星星";
                 break;
             case R.id.btn_wind:
@@ -195,18 +211,21 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
                 clickBtn = "Sun";
                 lastTime = Status.getCollectTime().getSunLasttime();
                 res = Status.getGoose().getGooseSun();
+                gooseEny=res*3;
                 suf = "个太阳";
                 break;
             case R.id.btn_rain:
                 clickBtn = "Rain";
                 lastTime = Status.getCollectTime().getRainLasttime();
                 res = Status.getGoose().getGooseRain();
+                gooseEny=res*6;
                 suf = "滴雨";
                 break;
         }
         Log.d("Pool", "onClick: "+clickBtn);
         Log.d("Pool",clickBtn+" is "+res);
-        setDialog(view,suf,res,clickBtn);
+
+        setDialog(view,suf,res,clickBtn,gooseEny);
         //getDeltaTime(lastTime);
     }
 
@@ -217,14 +236,17 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
      * @param suf
      * @param view
      */
-    public void setDialog(View view,String suf,int res, String clickBtn){
+    public void setDialog(View view,String suf,int res, String clickBtn,int gooseEny){
         Log.d("setDialog", "setDialog: Success");
         if(res == 0){
             String msg = "你还没有收集到哦 ~ 再等等吧！";
-            showButtonDialogFragment(view,msg,"0");
+
+            showButtonDialogFragment(view,msg,"0",gooseEny);
         }else{
-            String msg = "你确定收集 "+res+" "+suf+"ma?";
-            showButtonDialogFragment(view,msg,clickBtn);
+
+            String msg = "你确定收集 "+res+" "+suf+"ma?将转化为鹅民币"+gooseEny+"元";
+
+            showButtonDialogFragment(view,msg,clickBtn,gooseEny);
         }
     }
 
@@ -234,7 +256,7 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
      * 显示dialog
      * @param view
      */
-    public void showButtonDialogFragment(View view, String msg, final String clickBtn) {
+    public void showButtonDialogFragment(View view, String msg, final String clickBtn, final int gooseEny) {
         ButtonDialogFragment buttonDialogFragment = new ButtonDialogFragment();
         buttonDialogFragment.show("h:", msg, new DialogInterface.OnClickListener() {
             @Override
@@ -244,7 +266,32 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
                 if(clickBtn.equals("0")){
 
                 }else {
-                    String[] params = {clickBtn};
+                    String[] params = new String[5];
+                    params[0] = clickBtn;
+                    params[1]= ""+gooseEny;
+                    gooseENY=(TextView)findViewById(R.id.gooseEny);
+                    Status.getGoose().setGooseEny(Status.getGoose().getGooseEny()+gooseEny);
+                    gooseENY.setText(""+Status.getGoose().getGooseEny());
+                    switch(clickBtn){
+                        case "Cloud":
+                            Status.getGoose().setGooseCloud(0);
+                            break;
+                        case "Wind":
+                            Status.getGoose().setGooseWind(0);
+                            break;
+                        case "Devil":
+                            Status.getGoose().setGooseDevil(0);
+                            break;
+                        case "Star":
+                            Status.getGoose().setGooseStar(0);
+                            break;
+                        case "Sun":
+                            Status.getGoose().setGooseSun(0);
+                            break;
+                        case "Rain":
+                            Status.getGoose().setGooseRain(0);
+                            break;
+                    }
                     new Post().execute(params);
                 }
             }
@@ -306,6 +353,17 @@ public class PoolActivity extends AppCompatActivity implements View.OnClickListe
                 send.put("One",strings[0]);
                 if(OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/update"), send) == MessageBox.UC_SUCCESS){
                     Log.d("doInBackGround ","UC_SUCCESS");
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("Value","GOOSE");
+                    jsonObject.put("gooseEny",Integer.valueOf(strings[1]));
+                    jsonObject.put("gooseSun",0);
+                    jsonObject.put("gooseStar",0);
+                    jsonObject.put("gooseDevil",0);
+                    jsonObject.put("gooseRain",0);
+                    jsonObject.put("userId", com.SillyGoose.Model.Status.getUser().getUserId());
+                    jsonObject.put("gooseWind",0);
+                    jsonObject.put("gooseCloud",0);
+                    OkHttpUnits.post(OkHttpUnits.setAndGetUrl("/update"),jsonObject);
                 }else{
                     Log.d("doInBackGround ","SYS_ERROR");
                     Toast.makeText(PoolActivity.INSTANCE,"系统错误",Toast.LENGTH_LONG).show();

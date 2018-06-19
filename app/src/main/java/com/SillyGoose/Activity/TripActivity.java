@@ -16,7 +16,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.SillyGoose.Model.Status;
 
 public class TripActivity extends AppCompatActivity {
     private ImageButton btn_return;
@@ -30,6 +33,13 @@ public class TripActivity extends AppCompatActivity {
     private ImageView btn_southwest;
     private ImageView btn_northwest;
     private ImageView btn_northeast;
+
+    private int tGood=0;
+    private int tMiddle=0;
+    private int tLow=0;
+    int gooseEny=0;
+    private TextView tgooseENY;
+
     //  价位表
     private static int[][] PRICE = {{1,1,1},{1,1,1},{1,1,1}};
 
@@ -39,7 +49,8 @@ public class TripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip);
         mp = MediaPlayer.create(this, R.raw.btn);
-
+        tgooseENY=(TextView)findViewById(R.id.tgooseEny);
+        tgooseENY.setText(""+Status.getGoose().getGooseEny());
         /*  添加地图触摸事件    东北*/
         btn_northeast = (ImageView) findViewById(R.id.btn_northeast);
         bitmap = ((BitmapDrawable) (((ImageView) btn_northeast).getBackground())).getBitmap();//得到ImageButton的图片
@@ -92,6 +103,7 @@ public class TripActivity extends AppCompatActivity {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
             int eventaction = event.getAction();
+            String city="";
             switch (eventaction) {
                 case MotionEvent.ACTION_DOWN:
 
@@ -103,9 +115,46 @@ public class TripActivity extends AppCompatActivity {
                     if (bitmap.getPixel((int) (event.getX()), ((int) event.getY())) == 0) {//判断点击处像素的颜色是否为0，0表示没 //内容
                         //System.out.println("点击区没图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
                     } else {
+                        if(view.getId() == R.id.btn_centralchina){
+                            city="华中地区";
+                            tGood=500;
+                            tMiddle=450;
+                            tLow=400;
+                        }else if(view.getId() == R.id.btn_northchina){
+                            city="华北地区";
+                            tGood=600;
+                            tMiddle=550;
+                            tLow=500;
+                        }else if(view.getId() == R.id.btn_eastchina){
+                            city="华东地区";
+                            tGood=400;
+                            tMiddle=350;
+                            tLow=300;
+                        }else if(view.getId() == R.id.btn_southchina){
+                            city="华南地区";
+                            tGood=600;
+                            tMiddle=550;
+                            tLow=500;
+                        }else if(view.getId() == R.id.btn_southwest){
+                            city="西南地区";
+                            tGood=700;
+                            tMiddle=650;
+                            tLow=600;
+                        }else if(view.getId() == R.id.btn_northwest){
+                            city="西北地区";
+                            tGood=900;
+                            tMiddle=850;
+                            tLow=800;
+                        }else if(view.getId() == R.id.btn_northeast){
+                            city="东北地区";
+                            tGood=700;
+                            tMiddle=650;
+                            tLow=600;
+                        }
                         //System.out.println("点击区有图像 "+bitmap.getPixel((int)(event.getX()),((int)event.getY())));
-                        chenshowDialog();
+                        chenshowDialog(city,tGood,tLow,tMiddle);
                         Log.d("trip", "onTouch:123 ");
+
                     }
                     break;
             }
@@ -115,11 +164,20 @@ public class TripActivity extends AppCompatActivity {
         }
     };
 
-    private void chenshowDialog() {
+    private void chenshowDialog(String city, final int tGood, final int tMiddle, final int tLow ) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(TripActivity.this);
-        builder.setTitle("选择类型");
-        builder.setSingleChoiceItems(new String[]{"有钱zuo", "有一点钱zuo", "没钱zuo"}, 0, new DialogInterface.OnClickListener() {
+        builder.setTitle("小鹅要去"+city+"旅行啦,选择交通工具类型吧");
+        builder.setSingleChoiceItems(new String[]{"有钱zuo: "+tGood, "有一点钱zuo: "+tMiddle, "没钱zuo: "+tLow}, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    gooseEny = tGood;
+                }else if(which==2){
+                    gooseEny = tMiddle;
+                }else if(which==3){
+                    gooseEny = tLow;
+                }
+
 
             }
         });
@@ -127,10 +185,21 @@ public class TripActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //**************还没有把高铁参数传给
                 mp.start();
-                ticketshowdailog();
-                dialogInterface.dismiss();
+                if(gooseEny>Status.getGoose().getGooseEny()){
+                     Toast.makeText(TripActivity.this,"小鹅没有足够的金币,请继续收集天气吧!",Toast.LENGTH_SHORT).show();
+                }else {
+                    System.out.println("delta GooseENY : "+ gooseEny);
+                    Status.getGoose().setGooseEny(Status.getGoose().getGooseEny() - gooseEny);
+                    Toast.makeText(TripActivity.this,"消耗金币"+gooseEny,Toast.LENGTH_SHORT).show();
+                    tgooseENY = (TextView) findViewById(R.id.tgooseEny);
+                    tgooseENY.setText("" + Status.getGoose().getGooseEny());
+                    ticketshowdailog();
+                    dialogInterface.dismiss();
+
+                }
+
+
             }
         });
         //3 添加否定按钮
@@ -150,7 +219,7 @@ public class TripActivity extends AppCompatActivity {
     private void ticketshowdailog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(TripActivity.this);
         builder.setTitle("购票");
-        builder.setMessage("小鹅即将乘坐***zuo列车");
+        builder.setMessage("小鹅即将乘坐列车");
         builder.setIcon(R.drawable.t_0061);
         //ticket=(ImageView)findViewById(R.id.t_002) ;
         //builder.setView(ticket);

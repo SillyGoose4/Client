@@ -91,4 +91,19 @@
         android:background="@drawable/btn_return"
         />
 
+    <ImageButton
+        android:id="@+id/btn_gooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_rain"
+        />
+
+    <TextView
+        android:id="@+id/gooseEny"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_gooseEny"
+        android:text="" />
 </RelativeLayout>
