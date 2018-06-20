@@ -39,13 +39,14 @@
           build.gradle : app gradle 信息
           README.md ： readme
 ### Build In Your computer
-1.clone to your computer
+1. clone to your computer
 
-    git clone https://github.com/SillyGoose4/Client.git Client
+        git clone https://github.com/SillyGoose4/Client.git Client
 
-2.Import into android Studio
+2. Import into android Studio
   (It will take you a lot of time,just wait for it build success)  
 
-3.Run.
+3. Run. 
+
 ### Release
 [逛吃的鹅v1.0.9](/app/build/outputs/apk/release/逛吃的鹅1.0.9.apk)

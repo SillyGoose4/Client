@@ -35,7 +35,7 @@
         android:name="com.SillyGoose.Utils.StartUtils"
         android:allowBackup="true"
         android:icon="@mipmap/e_icon"
-        android:label="Game"
+        android:label="逛吃的鹅"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
