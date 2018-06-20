@@ -14,10 +14,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
 
-        android:layout_x="293dp"
-        android:layout_y="2dp"
-        android:background="@drawable/btn_album"
-        />
+        android:layout_x="341dp"
+        android:layout_y="0dp"
+        android:background="@drawable/btn_album" />
 
     <ImageButton
         android:id="@+id/btn_return"
@@ -122,7 +121,14 @@
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btn_gooseEny"
-        android:layout_x="273dp"
-        android:layout_y="536dp"
-        android:text="" />
+        android:layout_x="164dp"
+        android:layout_y="3dp"
+        android:background="@drawable/moneypackge"
+        android:fontFamily="sans-serif-condensed"
+        android:lineSpacingExtra="10sp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30sp"
+        android:typeface="monospace" />
 </AbsoluteLayout>

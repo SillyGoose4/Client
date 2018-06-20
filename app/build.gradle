@@ -10,6 +10,14 @@ android {
     //        storePassword 'SillyGoose4d'
     //  }
     //}
+    signingConfigs {
+        config {
+            keyAlias 'SillyGoose'
+            keyPassword 'SillyGoose4d'
+            storeFile file('C:/Users/wangj/Documents/Android Jks/SillyGoose.jks')
+            storePassword 'SillyGoose4d'
+        }
+    }
     compileSdkVersion 26
     //buildToolsVersion "26.0.3"
     defaultConfig {
@@ -17,18 +25,26 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         //debug {
         //    signingConfig signingConfigs.config
         //}
     }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all{
+            def fileName = "逛吃的鹅${defaultConfig.versionName}.apk"
+            outputFileName = fileName
+        }
+    }
+
     sourceSets {
         main {
             jniLibs.srcDirs 'libs'
@@ -56,6 +72,7 @@ dependencies {
     compile 'com.squareup.okio:okio:1.7.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     implementation files('libs/showapi_sdk.jar')
     implementation files('libs/BaiduLBS_Android.jar')
 }

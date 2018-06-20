@@ -103,7 +103,15 @@
         android:id="@+id/gooseEny"
         android:layout_width="200px"
         android:layout_height="100px"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btn_gooseEny"
-        android:text="" />
+        android:layout_alignEnd="@+id/btn_sun"
+        android:layout_below="@+id/btn_cloud"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/moneypackge"
+        android:fontFamily="sans-serif-condensed"
+        android:lineSpacingExtra="10sp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30sp"
+        android:typeface="monospace" />
 </RelativeLayout>
