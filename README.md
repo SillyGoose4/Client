@@ -48,3 +48,4 @@
 
 3.Run.
 ### Release
+[逛吃的鹅v1.0.9](/app/build/outputs/apk/release/逛吃的鹅1.0.9.apk)
